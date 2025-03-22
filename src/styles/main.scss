@@ -1,0 +1,23 @@
+// abstract 
+
+@use "abstract/mixins";
+@use "./abstract/variables" as vars;
+
+// Home Page
+
+// sidebar
+
+@use "pages/home";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main{
+   width:100%;
+   background-image: url('https://4kwallpapers.com/images/wallpapers/kamnik-alps-mountain-range-forest-mountains-landscape-mist-3840x2160-708.jpg');
+   height:100vh;
+   background-size: cover;
+   background-position: center;
+}

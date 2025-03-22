@@ -1,0 +1,24 @@
+@use '../abstract/variables' as vars;
+
+.layout{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.sidebar{
+    width:250px;
+    height:100vh;
+    position: fixed;
+    background-color: vars.$background-color;
+    box-shadow: vars.$box-shadow;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+}
+.Suggestion{
+    width:300px;
+    height:100vh;
+    background-color: vars.$background-color;
+    box-shadow: vars.$box-shadow;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+}
