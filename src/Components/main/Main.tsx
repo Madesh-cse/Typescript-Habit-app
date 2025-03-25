@@ -50,6 +50,9 @@ function Main() {
                 <span><a href="">Connect Outlook Calendar</a></span>
               </div>
            </div>
+           <div className='InputTasks'>
+             <input type="text" placeholder='Enter task Title' />
+           </div>
         </div>
    </section>
   )

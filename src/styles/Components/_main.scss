@@ -1,8 +1,11 @@
 @use "../abstract/variables" as vars;
 
 .MainContent{
+    width:100%;
+    height:100vh;
     position: relative;
     padding-top: 20px;
+    // border:1px solid red;
 
     h1{
         font-family: sans-serif;
@@ -18,7 +21,7 @@
 
     .Dynamic-day{
         width: 630px;
-        height:95px;
+        height:100px;
         background-color: vars.$background-color;
         margin-top: vars.$margin-top;
         border-radius: 10px;
@@ -40,6 +43,25 @@
             text-decoration: none;
             font-family: sans-serif;
             color:#0000ff;
+        }
+    }
+
+    .InputTasks{
+        position: absolute;
+        bottom: 30px;
+        left:40px;
+
+        input{
+            width:600px;
+            height:40px;
+            background-color: vars.$background-color;
+            box-shadow: vars.$box-shadow;
+            backdrop-filter: blur(2px);
+            border:1px solid #c0c0c0;
+            color:#fff;
+            border-radius: 5px;
+            padding-left: 15px;
+            font-size: 15px;
         }
     }
 }
