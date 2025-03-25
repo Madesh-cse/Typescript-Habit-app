@@ -1,35 +1,42 @@
 import { NavLink } from "react-router-dom";
-import { TbCircleDashedCheck } from "react-icons/tb";
-import { IoCalendarNumberSharp } from "react-icons/io5";
-import { FaTasks } from "react-icons/fa";
-function Mylist() {
+import '../../styles/Components/_sidebar.scss'
+interface MylistProps {
+
+    listContent:string[] | null
+}
+
+function Mylist({listContent}:MylistProps) {
+
+    const listCount = listContent?.length
   return (
     <div className='sidebar-list'>
     <ul>
        <li>
            <NavLink to=''>
-               <span><TbCircleDashedCheck/></span>
                <span>Personal</span>
+               <span className="count">{listCount}</span>
            </NavLink>
        </li>
        <li>
            <NavLink to=''>
-               <span><IoCalendarNumberSharp/></span>
                <span>Work</span>
            </NavLink>
        </li>
        <li>
            <NavLink to=''>
-               <span><FaTasks/>    </span>
                <span>Grocery List</span>
            </NavLink>
        </li>
        <li>
            <NavLink to=''>
-               <span><IoCalendarNumberSharp/></span>
                <span>Project</span>
            </NavLink>
        </li>
+       {listContent?.map((list,index)=>(
+        <NavLink to='' key={index}>
+            <li>{list}</li>
+        </NavLink>
+       ))}
     </ul>
   </div>
   )
