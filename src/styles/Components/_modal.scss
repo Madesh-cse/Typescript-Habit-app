@@ -1,0 +1,46 @@
+.ModalBox{
+  margin: auto;
+  width:500px;
+  height:250px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+
+   p{
+    position: absolute;
+    top:20px;
+    right:20px;
+    font-family: sans-serif;
+    cursor: pointer;
+  }
+
+  h1{
+    font-family: sans-serif;
+  }
+
+  .InputBox{
+    margin-top: 30px;
+  }
+
+  input,label{
+    display: block;
+  }
+
+  button{
+    position: absolute;
+    bottom: 15px;
+    right:20px;
+    padding: 8px 20px;
+    background-color:  #0057b8;
+    outline:none;
+    border:1px solid #0057b8;
+    color:#fff;
+    border-radius: 20px;
+    cursor: pointer;
+
+  }
+}
