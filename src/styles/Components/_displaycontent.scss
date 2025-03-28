@@ -1,0 +1,45 @@
+@use "../abstract/variables" as vars;
+
+.display-box {
+    width:100%;
+    height:400px;
+    overflow-y: scroll;
+    scrollbar-color: rgba(0, 0, 0, 0.434) transparent;
+    ul{
+        list-style-type: none;
+    }
+
+    .Content-box{
+        width: 630px;
+        height:70px;
+        background-color: vars.$background-color;
+        margin-top:20px;
+        border-radius: 10px;
+        padding: 25px 10px 15px 10px;
+        color:#fff;
+        display: flex;
+        font-family: sans-serif;
+
+        .radio-input{
+            input[type="radio"] {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        .list-name{
+            margin-top: -15px;
+            margin-left: 10px;
+
+            p{
+                font-size: 12px;
+            }
+
+            li{
+                margin-top: 10px;
+                font-size: 15px;
+            }
+        }
+    
+    }
+}
