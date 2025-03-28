@@ -1,8 +1,15 @@
 import '../../styles/Components/_main.scss';
 import { useState,useEffect } from 'react';
+import { FaArrowUp } from "react-icons/fa";
+import { useInputContext } from '../../Context/InputSubmissonContext';
+import DisplayContent from './DisplayContent';
+
 function Main() {
 
+    const{ addSubmisson} = useInputContext()
+
     const[gretting,setgretting] = useState<string>("")
+    const[inputText,setinputText] = useState<string>('')
 
     useEffect(()=>{
 
@@ -36,6 +43,15 @@ function Main() {
         year: 'numeric',
     }).format(new Date());
 
+    const handleSubmit = (e:React.FormEvent)=>{
+        e.preventDefault()
+
+        if(inputText.trim()!==""){
+            addSubmisson(inputText)
+            setinputText('')
+        }
+    }
+
 
   return (
    <section>
@@ -50,8 +66,12 @@ function Main() {
                 <span><a href="">Connect Outlook Calendar</a></span>
               </div>
            </div>
+           <DisplayContent/>
            <div className='InputTasks'>
-             <input type="text" placeholder='Enter task Title' />
+            <form action="" onSubmit={handleSubmit}>
+                <input type="text" placeholder='Enter task Title' value={inputText} onChange={(e)=>setinputText(e.target.value)} />
+                <button type='submit'><FaArrowUp/></button>
+            </form>
            </div>
         </div>
    </section>

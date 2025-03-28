@@ -14,6 +14,7 @@ import Modal from '../Modal/ListModal';
 import Mylist from './Mylist';
 function Sidebar() {
 
+
     const [isopen,setopen] = useState<boolean>(false);
     const[submittedValue,setsubmittedValue] = useState<string[]>([])
 
@@ -27,6 +28,7 @@ function Sidebar() {
     }
 
     const ref = useRef<{ openModal: () => void; closeModal: () => void }>(null)
+
 
   return (
     <div className='layout'>
