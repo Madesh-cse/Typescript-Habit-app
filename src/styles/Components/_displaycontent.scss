@@ -21,9 +21,10 @@
         font-family: sans-serif;
 
         .radio-input{
-            input[type="radio"] {
+            input[type="checkbox"] {
                 width: 18px;
                 height: 18px;
+                border-radius: 50%;
             }
         }
 
