@@ -13,7 +13,7 @@ function DisplayContent() {
         {submittedValue.map((list,index)=>(
             <div className="Content-box">
                 <div className="radio-input">
-                    <input type="radio" />
+                    <input type="checkbox" />
                 </div>
                 <div className="list-name">
                    <p><span><IoLockClosedOutline/></span> My list - Personal</p>
