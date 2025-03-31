@@ -1,0 +1,86 @@
+@use '../abstract/mixins';
+@use '../abstract/variables' as vars;
+.Suggestion{
+    .helping-tool{
+        @include mixins.flex-type();
+        padding-top: 20px;
+    
+        .tools-1{
+            @include mixins.flex-type();
+            font-size: 17px;
+            color:vars.$Title-color;
+            font-family: sans-serif;
+            margin-top: 10px;
+        }
+        .tools-2{
+            border:1px solid #000;
+            padding: 10px 10px;
+            background-color: #000;
+            border-radius: 20px;
+    
+            span{
+                font-size: 20px;
+                color:vars.$Title-color;
+                margin: auto 10px;
+            }
+        }
+    }
+    .Filter-input{
+        margin: 10px;
+        position: relative;
+       input{
+        width:320px;
+        height: 40px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #c0c0c0;
+        color:#fff;
+        font-size: 18px;
+        outline: none;
+       }
+       span{
+        position: absolute;
+        top:18px;
+        right:20px;
+        color:#fff;
+        font-size:18px;
+       }
+    }
+    .suggestion-list{
+        margin: 20px 15px;
+        ul{
+            list-style-type: none;
+        }
+
+        .Suggestion-box{
+            width:320px;
+            height:auto;
+            background-color: rgba(0, 0, 0, 0.545);
+            color:#fff;
+            display: flex;
+            padding: 20px 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            font-family: sans-serif;
+            border:1px solid #000;
+            cursor: pointer;
+
+            .Suggestion-box:hover{
+                border: 1px solid rgb(0, 85, 255) ;
+            }
+
+            .addition-feature{
+                margin-top: 10px;
+                color:rgb(0, 85, 255)
+            }
+
+            .list-name{
+                margin-left: 15px;
+
+                li{
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+}
