@@ -29,7 +29,6 @@ function Sidebar() {
 
     const ref = useRef<{ openModal: () => void; closeModal: () => void }>(null)
 
-
   return (
     <div className='layout'>
         <aside>
