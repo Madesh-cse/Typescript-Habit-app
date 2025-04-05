@@ -44,7 +44,7 @@ function Sidebar() {
                <div className='sidebar-list'>
                  <ul>
                     <li>
-                        <NavLink to=''>
+                        <NavLink to='/'>
                             <span><TbCircleDashedCheck/></span>
                             <span>My day</span>
                         </NavLink>

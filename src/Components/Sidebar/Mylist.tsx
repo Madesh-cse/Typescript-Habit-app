@@ -12,7 +12,7 @@ function Mylist({listContent}:MylistProps) {
     <div className='sidebar-list'>
     <ul>
        <li>
-           <NavLink to=''>
+           <NavLink to='/Personal'>
                <span>Personal</span>
                <span className="count">{listCount}</span>
            </NavLink>
