@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react"
 
+// interface create a structure of an object
 interface InputSubmissonType {
     submittedValue:string[],
     addSubmisson:(value:string)=>void
