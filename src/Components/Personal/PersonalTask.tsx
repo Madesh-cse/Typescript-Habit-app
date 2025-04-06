@@ -2,14 +2,11 @@ import "../../styles/Components/_personallist.scss"
 import { useInputContext } from "../../Context/InputSubmissonContext"
 import { useState } from "react"
 import { FaArrowUp } from "react-icons/fa";
-import { RiContactsLine } from "react-icons/ri";
-import { TfiReload } from "react-icons/tfi";
-import { TfiHeadphoneAlt } from "react-icons/tfi";
-import { CgNotifications } from "react-icons/cg";
-import { IoSearch } from "react-icons/io5";
+import PersonalTaskTools from "./PersonalTaskTools";
+
 function PersonalTask() {
 
-  const{ submittedValue,addSubmisson} = useInputContext()
+  const{ submittedValue,addSubmisson,toggleCompleted} = useInputContext()
 
   const[input,setinput] = useState('')
 
@@ -23,22 +20,13 @@ function PersonalTask() {
 
   return (
     <div className="TaskContainer">
-      <div className="TaskContainer-tools">
-        <div className="TaskContainer-tools1">
-          <span>Work</span> |
-          <span><RiContactsLine/>Share</span> |
-          <span>View</span> |
-        </div>
-        <div className="TaskContainer-tools1">
-          <span><TfiReload/></span>
-          <span><TfiHeadphoneAlt/></span>
-          <span><CgNotifications/></span>
-          <span><IoSearch/></span>
-        </div>
-      </div>
+      <PersonalTaskTools/>
       <div className="TaskBox">
-        {submittedValue.map((list,index)=>(
-          <li key={index}>{list}</li>
+        {submittedValue.map((task,index)=>(
+          <div className="TaskBox-flex">
+            <input type="radio"  checked={task.completed} onChange={() => toggleCompleted(index)}/>
+            <li className={task.completed ? 'completed' : ''} key={index}>{task.text}</li>
+          </div>
         ))}
         </div>
         <div className="TaskInput">

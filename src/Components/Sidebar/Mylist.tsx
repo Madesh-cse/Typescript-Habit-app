@@ -18,7 +18,7 @@ function Mylist({listContent}:MylistProps) {
            </NavLink>
        </li>
        <li>
-           <NavLink to=''>
+           <NavLink to='/Work'>
                <span>Work</span>
            </NavLink>
        </li>

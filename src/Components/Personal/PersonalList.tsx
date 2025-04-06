@@ -10,11 +10,15 @@ import Modal from "../Modal/ListModal";
 import Mylist from "../Sidebar/Mylist";
 import "../../styles/Components/_personallist.scss"
 import PersonalTask from "./PersonalTask";
+import SubTask from "./SubTask";
+import { useInputContext } from "../../Context/InputSubmissonContext";
 
 function PersonalList() {
 
+  const { submittedValue } = useInputContext();
+
   const [isopen,setopen] = useState<boolean>(false);
-  const[submittedValue,setsubmittedValue] = useState<string[]>([])
+  const[SubmittedValue,setsubmittedValue] = useState<string[]>([])
 
   const HandleToggleFunction = ():void=>{
     setopen(prevState=>!prevState)
@@ -45,6 +49,7 @@ function PersonalList() {
                 <NavLink to='/'>
                   <span><TbCircleDashedCheck/></span>
                   <span>My day</span>
+                  <span className="count">{submittedValue.length}</span>
                 </NavLink>
               </li>
               <li>
@@ -74,11 +79,12 @@ function PersonalList() {
               </div>
               <p className='toggle-btn' onClick={(()=>ref.current?.openModal())}><FaPlus/></p>
             </div>
-            {!isopen ? <Mylist listContent = {submittedValue}/>:''}
+            {!isopen ? <Mylist listContent = {SubmittedValue}/>:''}
           </div>
         </div>       
       </aside>
       <PersonalTask/>
+      {submittedValue.length > 0 ?   <SubTask/>:'' }
       <Modal ref={ref} onSubmit={(HandleSubmite)}/>
     </div>
   )
