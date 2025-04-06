@@ -34,14 +34,14 @@ function Suggestion() {
           </div>
           <div className="suggestion-list">
             <ul>
-              {submittedValue.map((list,index)=>(
+              {submittedValue.map((task,index)=>(
                 <div className="Suggestion-box">
                   <div className="addition-feature">
                     <p><FaPlus/></p>
                   </div>
                   <div className="list-name">
                     <p><span><IoLockClosedOutline/></span> My list - Personal</p>
-                    <li key={index}>{list}</li>
+                    <li key={index}>{task.text}</li>
                   </div>
                 </div>
               ))}

@@ -1,10 +1,17 @@
 import { createContext, useContext, useState } from "react"
 
+interface Task{
+    text:string,
+    completed:boolean
+}
+
 // interface create a structure of an object
 interface InputSubmissonType {
-    submittedValue:string[],
+    submittedValue:Task[],
     addSubmisson:(value:string)=>void
+    toggleCompleted: (index: number) => void;
 }
+
 
 // default context value has to created 
 
@@ -23,14 +30,27 @@ export const useInputContext = ()=>{
 // create a children for provider 
 
 export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children})=>{
-    const [submittedValue,setSubmittedValue] = useState<string[]>([])
+    const [submittedValue,setSubmittedValue] = useState<Task[]>([])
 
     // The submitted value is append to an array 
-    const addSubmisson = (value:string)=>{
-        setSubmittedValue((prevValue)=>[...prevValue,value])
+    const addSubmisson = (text:string)=>{
+        const newTask: Task = { text, completed: false };
+        setSubmittedValue((prev) => [...prev, newTask]);
     }
+
+    // Toggle the completed status
+    // index is represent the clicked list item
+  const toggleCompleted = (index: number) => {
+    setSubmittedValue((prev) =>
+      prev.map((task, i) =>
+        // : Is this task's index equal to the one that was clicked?
+        i === index ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
     return(
-        <InputContext.Provider value={{submittedValue,addSubmisson}}>
+        <InputContext.Provider value={{submittedValue,addSubmisson,toggleCompleted}}>
             {children}
         </InputContext.Provider>
     )
