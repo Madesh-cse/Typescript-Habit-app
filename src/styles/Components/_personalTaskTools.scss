@@ -1,0 +1,43 @@
+@use '../abstract/variables' as vars;
+
+.TaskContainer-tools{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    margin-top: 20px;
+
+    .TaskContainer-tools1{
+        width:300px;
+        height:45px;
+        background-color: #1c1c1e; /* dark gray/black */
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        color:#fff;
+        padding: 10px 15px;
+
+        span{
+            margin-right: 15px;
+            border-left:3px solid #c0c0c0;
+            padding-left: 10px;
+        }
+    }
+
+    .TaskContainer-tools2{
+        width:250px;
+        height:45px;
+        background-color: #1c1c1e; /* dark gray/black */
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+        .Subtask-tool{
+           padding: 10px 0 0 20px;
+
+           span{
+            font-size: 20px;
+            color:vars.$Title-color;
+            margin: auto 10px;
+           }
+        }
+    }
+
+}
