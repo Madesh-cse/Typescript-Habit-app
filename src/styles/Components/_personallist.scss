@@ -11,8 +11,12 @@
 }
 .TaskContainer{
     width:100%;
-    border:1px solid red;
     margin-left: 280px;
+
+    .TaskFlex{
+        display: flex;
+        justify-content: space-between
+    }
 
     .TaskBox{
         width: 500px;
@@ -89,18 +93,18 @@
 // SubTask
 
 .Subtask{
-    margin-top: 20px;
+    margin-top: 8px;
 
     .SubTaskBox{
         width: 500px;
-        height: 600px;
+        height: 590px;
         background-color: #1c1c1e; /* dark gray/black */
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
+        border-radius: 12px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         padding: 20px;
         color: white;
         overflow-y: auto;
-        margin-top: 50px;
+        margin-top: 5px;
+        margin-right:40px;
     }
 }
