@@ -9,20 +9,20 @@ import '../../styles/Components/_personalTaskTools.scss'
 function PersonalTaskTools() {
   return (
     <div className="TaskContainer-tools">
-        <div className="TaskContainer-tools1">
-          <span>Personal</span> 
-          <span><RiContactsLine/>Share</span>
-          <span><BsArrowDownUp/>View</span>
-        </div>
-        <div className="TaskContainer-tools2">
-            <div className="Subtask-tool">
-                <span><TfiReload/></span>
-                <span><TfiHeadphoneAlt/></span>
-                <span><CgNotifications/></span>
-                <span><IoSearch/></span>
-            </div>
-        </div>
+      <div className="TaskContainer-tools1">
+        <span>Personal</span> 
+        <span><RiContactsLine/>Share</span>
+        <span><BsArrowDownUp/>View</span>
       </div>
+        <div className="TaskContainer-tools2">
+          <div className="Subtask-tool">
+            <span><TfiReload/></span>
+            <span><TfiHeadphoneAlt/></span>
+            <span><CgNotifications/></span>
+            <span><IoSearch/></span>
+          </div>
+        </div>
+    </div>
   )
 }
 

@@ -3,6 +3,7 @@ import { useInputContext } from "../../Context/InputSubmissonContext"
 import { useState } from "react"
 import { FaArrowUp } from "react-icons/fa";
 import PersonalTaskTools from "./PersonalTaskTools";
+import SubTask from "./SubTask";
 
 function PersonalTask() {
 
@@ -21,19 +22,24 @@ function PersonalTask() {
   return (
     <div className="TaskContainer">
       <PersonalTaskTools/>
-      <div className="TaskBox">
-        {submittedValue.map((task,index)=>(
-          <div className="TaskBox-flex">
-            <input type="radio"  checked={task.completed} onChange={() => toggleCompleted(index)}/>
-            <li className={task.completed ? 'completed' : ''} key={index}>{task.text}</li>
+      <div className="TaskFlex">  
+        <div className="Task-container-1">
+          <div className="TaskBox">
+            {submittedValue.map((task,index)=>(
+              <div className="TaskBox-flex">
+                <input type="radio"  checked={task.completed} onChange={() => toggleCompleted(index)}/>
+                <li className={task.completed ? 'completed' : ''} key={index}>{task.text}</li>
+              </div>
+            ))}
           </div>
-        ))}
+            <div className="TaskInput">
+              <form action="" onSubmit={handleSubmit}> 
+                <input type="text" value={input} onChange={(e)=>setinput(e.target.value)} placeholder="Add Task"  />
+                <button type='submit'><FaArrowUp/></button>
+              </form>
+          </div>
         </div>
-        <div className="TaskInput">
-          <form action="" onSubmit={handleSubmit}> 
-            <input type="text" value={input} onChange={(e)=>setinput(e.target.value)} placeholder="Add Task"  />
-            <button type='submit'><FaArrowUp/></button>
-          </form>
+        {submittedValue.length > 0 ?   <SubTask/>:'' }
       </div>
     </div>
   )
