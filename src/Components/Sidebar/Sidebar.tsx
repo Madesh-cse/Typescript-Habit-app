@@ -1,8 +1,6 @@
 import '../../styles/Components/_sidebar.scss'
 import { useState } from 'react';
 import { useRef } from 'react';
-import Main from '../main/Main'
-import Suggestion from '../main/Suggestion'
 import { IoSettingsOutline } from "react-icons/io5";
 import { TbCircleDashedCheck } from "react-icons/tb";
 import { IoCalendarNumberSharp } from "react-icons/io5";
@@ -50,7 +48,7 @@ function Sidebar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to=''>
+                        <NavLink to='/weekschedule'>
                             <span><IoCalendarNumberSharp/></span>
                             <span>Next 7 days</span>
                         </NavLink>
@@ -80,9 +78,7 @@ function Sidebar() {
                </div>
             </div>
         </aside>
-        <Main/>
         <Modal ref={ref} onSubmit={(HandleSubmite)}/>
-        <Suggestion/>
     </div>
   )
 }
