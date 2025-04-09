@@ -9,9 +9,10 @@ Modal.setAppElement("#root");
 interface ReminderModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSave: (date: Date | null) => void;
 }
 
-const ReminderModal: React.FC<ReminderModalProps> = ({ isOpen, onClose }) => {
+const ReminderModal: React.FC<ReminderModalProps> = ({ isOpen, onClose,onSave }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
   const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,10 +59,14 @@ const ReminderModal: React.FC<ReminderModalProps> = ({ isOpen, onClose }) => {
       </div>
       <div className="modal-footer">
         <button onClick={onClose}>Cancel</button>
-        <button onClick={() => {
-          console.log("Set date:", selectedDate);
-          onClose();
-        }}>Set</button>
+        <button
+          onClick={() => {
+            onSave(selectedDate)// send date to parent
+            onClose();
+          }}
+        >
+         Set
+        </button>
       </div>
     </Modal>
   );

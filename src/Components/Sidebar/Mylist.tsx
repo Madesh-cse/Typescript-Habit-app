@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import '../../styles/Components/_sidebar.scss'
+import { useInputContext } from "../../Context/InputSubmissonContext";
 interface MylistProps {
 
     listContent:string[] | null
@@ -7,14 +8,16 @@ interface MylistProps {
 
 function Mylist({listContent}:MylistProps) {
 
-    const listCount = listContent?.length
+    const {submittedValue} = useInputContext()
+
+
   return (
     <div className='sidebar-list'>
     <ul>
        <li>
            <NavLink to='/Personal'>
                <span>Personal</span>
-               <span className="count">{listCount}</span>
+               <span className="count">{submittedValue.length}</span>
            </NavLink>
        </li>
        <li>
