@@ -10,11 +10,14 @@ import { FaPlus } from "react-icons/fa6";
 import { NavLink } from 'react-router-dom';
 import Modal from '../Modal/ListModal';
 import Mylist from './Mylist';
+import { useInputContext } from '../../Context/InputSubmissonContext';
 function Sidebar() {
+
+    const{submittedValue} = useInputContext()
 
 
     const [isopen,setopen] = useState<boolean>(false);
-    const[submittedValue,setsubmittedValue] = useState<string[]>([])
+    const[SubmittedValue,setsubmittedValue] = useState<string[]>([])
 
     const HandleToggleFunction = ():void=>{
         setopen(prevState=>!prevState)
@@ -45,6 +48,7 @@ function Sidebar() {
                         <NavLink to='/'>
                             <span><TbCircleDashedCheck/></span>
                             <span>My day</span>
+                            <span className='count'>{submittedValue.length}</span>
                         </NavLink>
                     </li>
                     <li>
@@ -74,7 +78,7 @@ function Sidebar() {
                         </div>
                         <p className='toggle-btn' onClick={(()=>ref.current?.openModal())}><FaPlus/></p>
                     </div>
-                    {!isopen ? <Mylist listContent = {submittedValue}/>:''}
+                    {!isopen ? <Mylist listContent = {SubmittedValue}/>:''}
                </div>
             </div>
         </aside>

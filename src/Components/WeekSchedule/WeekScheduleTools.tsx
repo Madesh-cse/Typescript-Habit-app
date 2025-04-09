@@ -4,6 +4,7 @@ import { TfiReload } from "react-icons/tfi";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { CgNotifications } from "react-icons/cg";
 import { IoSearch } from "react-icons/io5";
+import '../../styles/Components/_weekschedule.scss'
 function WeekScheduleTools() {
   return (
     <div className="TaskContainer-tools">
