@@ -48,5 +48,36 @@
             }
         }
 
+        .TaskList{
+            list-style-type: none;
+            margin-top: 10px;
+
+            .Schedule-flex{
+                display: flex;
+                padding: 13px 15px;
+                background-color: #2B2B2B;
+                color:#fff;
+                border-radius: 10px;
+                margin-top: 10px;
+
+                .Personal-list{
+                    margin-left: 10px;
+
+                    .Task-type{
+                        font-size: 12px;
+                        color:#c0c0c0;
+                        margin-bottom: 10px;
+                    }
+                }
+
+                input[type='checkbox']{
+                    border-radius: 50%;
+                }
+
+                li{
+                    margin-top: 10px;
+                }
+            }
+        }
     }
 }

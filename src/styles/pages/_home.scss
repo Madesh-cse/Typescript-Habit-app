@@ -27,6 +27,14 @@
 
 @use "../Components/personalTaskTools";
 
+// COMPONENTS SUBTASK
+
+@use '../Components/subtask';
+
 // COMPONENTS DATE MODEL
 
-@use '../Components/datemodal'
+@use '../Components/datemodal';
+
+// COMPONENT WEEKSCHEDULE
+
+@use '../Components/weekschedule'

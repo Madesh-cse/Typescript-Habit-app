@@ -90,21 +90,3 @@
         }
     }
 }
-// SubTask
-
-.Subtask{
-    margin-top: 8px;
-
-    .SubTaskBox{
-        width: 500px;
-        height: 590px;
-        background-color: #1c1c1e; /* dark gray/black */
-        border-radius: 12px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        padding: 20px;
-        color: white;
-        overflow-y: auto;
-        margin-top: 5px;
-        margin-right:40px;
-    }
-}
