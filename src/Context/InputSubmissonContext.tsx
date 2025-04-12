@@ -1,15 +1,17 @@
 import { createContext, useContext, useState } from "react"
 
 interface Task{
-    text:string,
-    completed:boolean
+  text:string,
+  completed:boolean
 }
+
 
 // interface create a structure of an object
 interface InputSubmissonType {
-    submittedValue:Task[],
-    addSubmisson:(value:string)=>void
-    toggleCompleted: (index: number) => void;
+  //[monday]:text of task
+    submittedValue:{ [day: string]: Task[] },
+    addSubmisson:(day: string,value:string)=>void
+    toggleCompleted: (day: string,index: number) => void;
 }
 
 
@@ -30,24 +32,29 @@ export const useInputContext = ()=>{
 // create a children for provider 
 
 export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children})=>{
-    const [submittedValue,setSubmittedValue] = useState<Task[]>([])
+    const [submittedValue,setSubmittedValue] = useState<{ [day: string]: Task[] }>({});
 
     // The submitted value is append to an array 
-    const addSubmisson = (text:string)=>{
+    const addSubmisson = (day: string,text:string)=>{
         const newTask: Task = { text, completed: false };
-        setSubmittedValue((prev) => [...prev, newTask]);
+        setSubmittedValue(prev => ({
+          // The prev task hold the task in an object
+          ...prev,
+          // [day]is a dynamic key(hold a days):[cuurent task or text of a day || if no task on a day it is empty[]],otherwise append new task
+          [day]: [...(prev[day] || []), newTask],
+        }));
     }
 
     // Toggle the completed status
     // index is represent the clicked list item
-  const toggleCompleted = (index: number) => {
-    setSubmittedValue((prev) =>
-      prev.map((task, i) =>
-        // : Is this task's index equal to the one that was clicked?
-        i === index ? { ...task, completed: !task.completed } : task
-      )
-    );
-  };
+    const toggleCompleted = (day: string, index: number) => {
+      setSubmittedValue(prev => ({
+        ...prev,
+        [day]: prev[day].map((task, i) =>
+          i === index ? { ...task, completed: !task.completed } : task // return unchanged task
+        ),
+      }));
+    };
 
     return(
         <InputContext.Provider value={{submittedValue,addSubmisson,toggleCompleted}}>
