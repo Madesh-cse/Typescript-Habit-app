@@ -53,7 +53,7 @@ function PersonalTask() {
           </div>
         </div>
 
-        {/* 🧠 Show SubTask only if a task was just added */}
+        {/*  Show SubTask only if a task was just added */}
         {latestTask && <SubTask task={latestTask} />}
       </div>
     </div>

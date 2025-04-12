@@ -3,6 +3,7 @@ import "../../styles/Components/_weekschedule.scss";
 import { useState } from "react";
 import { useInputContext } from "../../Context/InputSubmissonContext";
 import { FaArrowUp } from "react-icons/fa";
+import { IoLockClosedOutline } from "react-icons/io5";
 
 const days = [
   "Sunday",
@@ -19,7 +20,7 @@ function TaskCardGrid() {
   const [inputs, setInputs] = useState<{ [day: string]: string }>({});
 
   const handleInputChange = (day: string, value: string) => {
-    setInputs(prev => ({ ...prev, [day]: value }));
+    setInputs(prev => ({ ...prev, [day]: value })); 
   };
 
   const handleSubmit = (e: React.FormEvent, day: string) => {
@@ -38,14 +39,19 @@ function TaskCardGrid() {
           <h3>{day}</h3>
           <ul className="TaskList">
             {(submittedValue[day] || []).map((task, index) => (
-              <li key={index} className={task.completed ? "completed" : ""}>
-                <input
-                  type="checkbox"
-                  checked={task.completed}
-                  onChange={() => toggleCompleted(day, index)}
-                />
-                {task.text}
-              </li>
+              <div className="Schedule-flex"> 
+                <li key={index} className={task.completed ? "completed" : ""}>
+                    <input
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => toggleCompleted(day, index)}
+                    />
+                </li>
+                <div className="Personal-list"> 
+                    <p className="Task-type"><span><IoLockClosedOutline /></span> My list {`>`}Personal</p>
+                    <p>{task.text}</p>
+                </div>
+              </div>
             ))}
           </ul>
           <div className="Task-Input">
