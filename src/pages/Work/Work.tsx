@@ -1,8 +1,8 @@
-import PersonalList from "../../Components/Personal/PersonalList"
+import WorkList from "../../Components/Work/WorkList"
 function Work() {
   return (
     <main>
-        <PersonalList/>
+      <WorkList/>
     </main>
   )
 }
