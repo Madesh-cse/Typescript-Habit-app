@@ -72,5 +72,31 @@
                 }
             }
         }
+        .Notes{
+            margin-top: 20px;
+
+            textarea{
+                width: 100%;
+                height: 50px;
+                padding: 10px 12px;
+                border-radius: 8px;
+                background-color: #1e1e1e;
+                border: 1px solid #333;
+                color: #eee;
+                font-size: 14px;
+                resize: vertical;
+                font-family: 'Segoe UI', sans-serif;
+                margin-top: 10px;
+
+                &::placeholder {
+                    color: #777;
+                  }
+              
+                  &:focus {
+                    outline: none;
+                    border-color: #4e9af1;
+                  }
+            }
+        }
     }
 }
