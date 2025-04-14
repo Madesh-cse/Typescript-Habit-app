@@ -14,10 +14,23 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(10px); /* For Safari support */
     padding: 20px 0 0 25px;
-    &_title{
-        display: flex;
+    transition: all 0.3s ease-in-out;
 
-        .logo{
+    &.closed {
+      width: 60px;
+  
+      .sidebar-list ul li a  {
+        display: none; // Hide text but keep icons if any
+      }
+      .toogle-title p{
+        display: none;
+      }
+    }
+    
+    &_title{
+      display: flex;
+
+       .logo{
             font-size: 22px;
             border:1px solid vars.$Title-color;
             color:vars.$Title-color;

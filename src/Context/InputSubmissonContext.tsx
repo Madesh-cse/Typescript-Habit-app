@@ -13,12 +13,6 @@ interface InputSubmissonType {
     addSubmisson:(day: string,value:string)=>void
     toggleCompleted: (day: string,index: number) => void;
 
-    //work Context
-
-    WorkTasks : {[day:string]:Task[]}
-    addWorkSubmission : (day:string,value:string)=>void
-    toggleWorkCompleted:(day:string,index:number)=>void
-
 
     // SelectedTask : interface Task
     SelectedTask : Task | null;
@@ -45,7 +39,6 @@ export const useInputContext = ()=>{
 
 export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children})=>{
     const [submittedValue,setSubmittedValue] = useState<{ [day: string]: Task[] }>({});
-    const[WorkTasks,setWorkTasks] = useState<{[day:string]:Task[]}>({})
     // update a state with a interface Task structure
     const [ SelectedTask, setSelectedTask] = useState<Task | null>(null);
 
@@ -72,27 +65,7 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
       }));
     };
 
-    // Work Task
 
-    const addWorkSubmission = (day:string,text:string)=>{
-
-      const newTaskWork:Task = {text,completed:false}
-       // The prev task hold the task in an object
-      setWorkTasks(prev=>({
-        // [day:string , Task [text,complete]]
-        ...prev,
-        [day]:[...(prev[day] || []),newTaskWork]
-      }))
-    }
-
-    const toggleWorkCompleted = (day:string,index:number)=>{
-      setWorkTasks(prev=>({
-        ...prev,
-        [day]:prev[day].map((task,i)=>
-          i === index ? {...task,completed:!task.completed}:task
-        )
-      }))
-    }
 
     const selectTask = (task:Task) =>{
      setSelectedTask(task)
@@ -106,9 +79,6 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
             ,toggleCompleted
             , SelectedTask
             ,selectTask,
-            WorkTasks,
-            addWorkSubmission,
-            toggleWorkCompleted
           }}
           >
           {children}
