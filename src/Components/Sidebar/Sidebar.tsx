@@ -13,7 +13,15 @@ import Mylist from './Mylist';
 import { useInputContext } from '../../Context/InputSubmissonContext';
 function Sidebar() {
 
-    const{submittedValue} = useInputContext()
+    const{submittedValue,WorkTasks} = useInputContext()
+
+    const totalTask = Object.values(submittedValue).reduce(
+        (total,task)=> total + task.length ,0
+    )
+
+    const WorkCount = Object.values(WorkTasks).reduce(
+        (total,work)=> total + work.length,0
+    )
 
 
     const [isopen,setopen] = useState<boolean>(false);
@@ -45,26 +53,27 @@ function Sidebar() {
                <div className='sidebar-list'>
                  <ul>
                     <li>
-                        <NavLink to='/'>
+                        <NavLink to='/'className={({ isActive }) => isActive ? "active" : undefined}>
                             <span><TbCircleDashedCheck/></span>
                             <span>My day</span>
-                            <span className='count'>{submittedValue.length}</span>
+                            <span className='count'>{totalTask}</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to='/weekschedule'>
                             <span><IoCalendarNumberSharp/></span>
                             <span>Next 7 days</span>
+                            <span className='count'>{totalTask}</span>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to=''>
+                        <NavLink to='/AllTask'>
                             <span><FaTasks/>    </span>
                             <span>All my task</span>
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to=''>
+                        <NavLink to='/Calender'>
                             <span><IoCalendarNumberSharp/></span>
                             <span>My calender</span>
                         </NavLink>
@@ -78,7 +87,7 @@ function Sidebar() {
                         </div>
                         <p className='toggle-btn' onClick={(()=>ref.current?.openModal())}><FaPlus/></p>
                     </div>
-                    {!isopen ? <Mylist listContent = {SubmittedValue}/>:''}
+                    {!isopen ? <Mylist listContent = {SubmittedValue} WorkCount = {WorkCount}/>:''}
                </div>
             </div>
         </aside>

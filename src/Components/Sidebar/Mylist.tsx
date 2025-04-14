@@ -4,34 +4,38 @@ import { useInputContext } from "../../Context/InputSubmissonContext";
 interface MylistProps {
 
     listContent:string[] | null
+    WorkCount : number
 }
 
-function Mylist({listContent}:MylistProps) {
+function Mylist({listContent,WorkCount}:MylistProps) {
 
     const {submittedValue} = useInputContext()
 
-
+    const totalTask = Object.values(submittedValue).reduce(
+        (total,tasks) => total + tasks.length,0
+    )
   return (
     <div className='sidebar-list'>
     <ul>
        <li>
            <NavLink to='/Personal'>
                <span>Personal</span>
-               <span className="count">{submittedValue.length}</span>
+               <span className="count">{totalTask}</span>
            </NavLink>
        </li>
        <li>
            <NavLink to='/Work'>
                <span>Work</span>
+               <span className="count">{WorkCount}</span>
            </NavLink>
        </li>
        <li>
-           <NavLink to=''>
+           <NavLink to='/WorkList'>
                <span>Grocery List</span>
            </NavLink>
        </li>
        <li>
-           <NavLink to=''>
+           <NavLink to='/Project'>
                <span>Project</span>
            </NavLink>
        </li>

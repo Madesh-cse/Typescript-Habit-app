@@ -6,9 +6,8 @@ import PersonalTaskTools from "./PersonalTaskTools";
 import SubTask from "./SubTask";
 
 function PersonalTask() {
-  const { submittedValue, addSubmisson, toggleCompleted } = useInputContext();
+  const { submittedValue, addSubmisson, toggleCompleted,selectTask,SelectedTask } = useInputContext();
   const [input, setInput] = useState('');
-  const [latestTask, setLatestTask] = useState<{ text: string; completed: boolean } | null>(null);
 
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
   const todayTasks = submittedValue[today] || [];
@@ -17,8 +16,8 @@ function PersonalTask() {
     e.preventDefault();
     if (input.trim()) {
       addSubmisson(today, input.trim());
-      const newTask = { text: input.trim(), completed: false };
-      setLatestTask(newTask); // store the newly added task
+      // const newTask = { text: input.trim(), completed: false };
+      // setLatestTask(newTask); // store the newly added task
       setInput('');
     }
   };
@@ -30,7 +29,7 @@ function PersonalTask() {
         <div className="Task-container-1">
           <div className="TaskBox">
             {todayTasks.map((task, index) => (
-              <div className="TaskBox-flex" key={index}>
+              <div className="TaskBox-flex" key={index} onClick={()=>selectTask(task)}>
                 <input
                   type="radio"
                   checked={task.completed}
@@ -54,7 +53,7 @@ function PersonalTask() {
         </div>
 
         {/*  Show SubTask only if a task was just added */}
-        {latestTask && <SubTask task={latestTask} />}
+       {SelectedTask && <SubTask/>}
       </div>
     </div>
   );

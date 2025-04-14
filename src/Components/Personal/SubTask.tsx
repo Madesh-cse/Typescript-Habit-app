@@ -7,15 +7,17 @@ import { FaArchive } from "react-icons/fa";
 import { PiClockClockwiseBold } from "react-icons/pi";
 import { CgNotes } from "react-icons/cg";
 import { FaHashtag } from "react-icons/fa";
+import { useInputContext } from '../../Context/InputSubmissonContext';
 
-interface SubTaskProps {
-  task: {
-    text: string;
-    completed: boolean;
-  };
-}
 
-function SubTask({ task }: SubTaskProps) {
+
+function SubTask() {
+
+  const { SelectedTask } = useInputContext();
+
+  if(!SelectedTask){
+    return null
+  }
   const [modalOpen, setModalOpen] = useState(false);
   const [reminderDate, setReminderDate] = useState<Date | null>(null);
 
@@ -32,10 +34,9 @@ function SubTask({ task }: SubTaskProps) {
             <p><FaArchive /></p>
           </div>
         </div>
-
         {/* Show the latest added task title */}
         <div className='Task-Heading'>
-          <h1>{task.text}</h1>
+          <h1>{SelectedTask.text}</h1>
         </div>
 
         <div className='Remainder'>
@@ -60,6 +61,11 @@ function SubTask({ task }: SubTaskProps) {
           <div className='Task-Tags'>
             <p><span className='tag'><FaHashtag /></span> Tags</p>
           </div>
+        </div>
+        {/* Enter the notes */}
+        <div className='Notes'>
+          <h3>Notes</h3>
+          <textarea placeholder='Insert Your Notes here'></textarea>
         </div>
       </div>
     </div>
