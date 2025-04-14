@@ -7,20 +7,29 @@ import { IoCalendarNumberSharp } from "react-icons/io5";
 import { FaTasks } from "react-icons/fa";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa6";
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import Modal from '../Modal/ListModal';
 import Mylist from './Mylist';
 import { useInputContext } from '../../Context/InputSubmissonContext';
+import { useWorkContext } from '../../Context/WorkInputSubmissionContext';
 function Sidebar() {
 
-    const{submittedValue,WorkTasks} = useInputContext()
+    const{submittedValue} = useInputContext()
+    const{WorkTasks} = useWorkContext()
+
+    const [isToogle,setisToogle] = useState(true)
+
+    const HandleOpen = ()=>{
+        setisToogle((prev)=>!prev)
+    }
 
     const totalTask = Object.values(submittedValue).reduce(
         (total,task)=> total + task.length ,0
     )
 
     const WorkCount = Object.values(WorkTasks).reduce(
-        (total,work)=> total + work.length,0
+        (total,work) => total + work.length,0
     )
 
 
@@ -41,12 +50,15 @@ function Sidebar() {
   return (
     <div className='layout'>
         <aside>
-            <div className='sidebar'>
+            <div className={`sidebar ${isToogle ? 'open':'closed'}`} >
                 <div className='sidebar_title'>
                     <p className='logo'><IoSettingsOutline/></p>
                     <div className='user_name'>
                         <h3>Madesh</h3>
                         <p>Free Plan</p>
+                    </div>
+                    <div className="sidebar-toggle" onClick={HandleOpen}>
+                       {isToogle ? <FaTimes /> : <FaBars />}
                     </div>
                 </div>
                <button className='preminum-btn'>Go Preminum</button>
