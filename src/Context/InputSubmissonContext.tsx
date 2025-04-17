@@ -2,7 +2,8 @@ import { createContext, useContext, useState } from "react"
 
 interface Task{
   text:string,
-  completed:boolean
+  completed:boolean,
+  subtasks?: string[]
 }
 
 
@@ -13,11 +14,11 @@ interface InputSubmissonType {
     addSubmisson:(day: string,value:string)=>void
     toggleCompleted: (day: string,index: number) => void;
 
-
     // SelectedTask : interface Task
     SelectedTask : Task | null;
     // method
-    selectTask : (task:Task)=>void
+    selectTask : (task:Task)=>void;
+    SubTask : (day:string,taskIndex:number,subtask:string)=>void;
 }
 
 
@@ -71,6 +72,29 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
      setSelectedTask(task)
     }
 
+    const SubTask = (day: string, taskIndex: number, subtask: string) => {
+      setSubmittedValue(prev => {
+        const updatedTasks = prev[day].map((task, i) =>
+          i === taskIndex
+            ? { ...task, subtasks: [...(task.subtasks || []), subtask] }
+            : task
+        );
+    
+        const updatedValue = {
+          ...prev,
+          [day]: updatedTasks,
+        };
+    
+        const updatedTask = updatedTasks[taskIndex];
+        if (SelectedTask && prev[day][taskIndex] === SelectedTask) {
+          setSelectedTask(updatedTask);
+        }
+    
+        return updatedValue;
+      });
+    };
+    
+
     return(
         <InputContext.Provider 
           value=
@@ -79,6 +103,7 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
             ,toggleCompleted
             , SelectedTask
             ,selectTask,
+            SubTask
           }}
           >
           {children}
