@@ -16,6 +16,7 @@ import { useWorkContext } from '../../Context/WorkInputSubmissionContext';
 function Sidebar() {
 
     const{submittedValue} = useInputContext()
+
     const{WorkTasks} = useWorkContext()
 
     const [isToogle,setisToogle] = useState(true)
