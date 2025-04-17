@@ -13,13 +13,33 @@ import { useInputContext } from '../../Context/InputSubmissonContext';
 
 function SubTask() {
 
-  const { SelectedTask } = useInputContext();
+  const { SelectedTask,submittedValue,SubTask } = useInputContext();
 
   if(!SelectedTask){
     return null
   }
+
   const [modalOpen, setModalOpen] = useState(false);
   const [reminderDate, setReminderDate] = useState<Date | null>(null);
+  const [subtaskInput, setSubtaskInput] = useState("");
+
+  console.log("SelectedTask subtasks: ", SelectedTask);
+
+  //Finding which day the task is contained
+  const selectedday = Object.keys(submittedValue).find(day=>
+    //if any task in that array is exactly equal === to SelectedTask.
+    submittedValue[day].some(task=>task===SelectedTask)
+  )
+  // if selectedday give me a selected day object with the index of dayarray 
+  // example Thurday : {subtask:string} with an index
+  const taskIndex = selectedday ? submittedValue[selectedday].findIndex(task=>task === SelectedTask):-1
+
+  const HandleSubtask = ()=>{
+    if(subtaskInput.trim() && selectedday!==undefined && taskIndex!==-1){
+      SubTask(selectedday,taskIndex,subtaskInput);
+      setSubtaskInput('')
+    }
+  }
 
   return (
     <div className="Subtask">
@@ -66,6 +86,15 @@ function SubTask() {
         <div className='Notes'>
           <h3>Notes</h3>
           <textarea placeholder='Insert Your Notes here'></textarea>
+        </div>
+        <div className='Subtask-input'>
+          <input type="text" value={subtaskInput} onChange={(e)=>setSubtaskInput(e.target.value)} placeholder='Subtask'/>
+          <button onClick={HandleSubtask}>Add Task</button>
+          <ul className='Subtask-List'>
+            {SelectedTask.subtasks?.map((sub, idx) => (
+              <li key={idx}>{sub}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
