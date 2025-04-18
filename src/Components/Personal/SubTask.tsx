@@ -25,14 +25,23 @@ function SubTask() {
 
   console.log("SelectedTask subtasks: ", SelectedTask);
 
-  //Finding which day the task is contained
+  //Giving me a day in object eg {monday,tueday....}
   const selectedday = Object.keys(submittedValue).find(day=>
-    //if any task in that array is exactly equal === to SelectedTask.
-    submittedValue[day].some(task=>task===SelectedTask)
+    // Finding which day the task list contain the select task
+    // with the particular day any task id is match with selected is
+    submittedValue[day].some(task=>task.id===SelectedTask.id)
   )
-  // if selectedday give me a selected day object with the index of dayarray 
-  // example Thurday : {subtask:string} with an index
-  const taskIndex = selectedday ? submittedValue[selectedday].findIndex(task=>task === SelectedTask):-1
+  console.log(selectedday)
+  // on the particular day the selected task object index will be spoted
+  const taskIndex = selectedday ? submittedValue[selectedday].findIndex(task=>task.id === SelectedTask.id):-1
+  console.log(taskIndex)
+  
+  // Creating a fresh task from the selected task
+  const currentTask =
+    selectedday && taskIndex !== -1
+      ? submittedValue[selectedday][taskIndex]
+    : null;
+  console.log(currentTask) 
 
   const HandleSubtask = ()=>{
     if(subtaskInput.trim() && selectedday!==undefined && taskIndex!==-1){
@@ -56,7 +65,7 @@ function SubTask() {
         </div>
         {/* Show the latest added task title */}
         <div className='Task-Heading'>
-          <h1>{SelectedTask.text}</h1>
+          <h1>{currentTask?.text}</h1>
         </div>
 
         <div className='Remainder'>
@@ -91,7 +100,7 @@ function SubTask() {
           <input type="text" value={subtaskInput} onChange={(e)=>setSubtaskInput(e.target.value)} placeholder='Subtask'/>
           <button onClick={HandleSubtask}>Add Task</button>
           <ul className='Subtask-List'>
-            {SelectedTask.subtasks?.map((sub, idx) => (
+            {currentTask?.subtasks?.map((sub, idx) => (
               <li key={idx}>{sub}</li>
             ))}
           </ul>

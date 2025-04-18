@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react"
+import { v4 as uuidv4 } from 'uuid';
 
 interface Task{
+  id:string,
   text:string,
   completed:boolean,
   subtasks?: string[]
@@ -46,7 +48,7 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
     //Personal Task
     // The submitted value is append to an array 
     const addSubmisson = (day: string,text:string)=>{
-        const newTask: Task = { text, completed: false };
+        const newTask: Task = { id:uuidv4(), text, completed: false };
         setSubmittedValue(prev => ({
           // The prev task hold the task in an object
           ...prev,
@@ -66,15 +68,16 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
       }));
     };
 
-
-
     const selectTask = (task:Task) =>{
      setSelectedTask(task)
     }
 
     const SubTask = (day: string, taskIndex: number, subtask: string) => {
+      // prev holds the task object 
       setSubmittedValue(prev => {
+        // prev[day] => cuurent day task list is be map
         const updatedTasks = prev[day].map((task, i) =>
+          // If the task is === selected task
           i === taskIndex
             ? { ...task, subtasks: [...(task.subtasks || []), subtask] }
             : task
@@ -86,7 +89,7 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
         };
     
         const updatedTask = updatedTasks[taskIndex];
-        if (SelectedTask && prev[day][taskIndex] === SelectedTask) {
+        if (SelectedTask && prev[day][taskIndex].id === SelectedTask.id) {
           setSelectedTask(updatedTask);
         }
     
