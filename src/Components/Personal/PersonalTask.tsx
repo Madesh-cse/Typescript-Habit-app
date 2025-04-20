@@ -6,19 +6,23 @@ import PersonalTaskTools from "./PersonalTaskTools";
 import SubTask from "./SubTask";
 
 function PersonalTask() {
-  const { submittedValue, addSubmisson, toggleCompleted,selectTask,SelectedTask } = useInputContext();
-  const [input, setInput] = useState('');
+  const {
+    submittedValue,
+    addSubmisson,
+    toggleCompleted,
+    selectTask,
+    SelectedTask,
+  } = useInputContext();
+  const [input, setInput] = useState("");
 
-  const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+  const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
   const todayTasks = submittedValue[today] || [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim()) {
       addSubmisson(today, input.trim());
-      // const newTask = { text: input.trim(), completed: false };
-      // setLatestTask(newTask); // store the newly added task
-      setInput('');
+      setInput("");
     }
   };
 
@@ -29,16 +33,36 @@ function PersonalTask() {
         <div className="Task-container-1">
           <div className="TaskBox">
             {todayTasks.map((task, index) => (
-              <div className="TaskBox-flex" key={index} onClick={()=>selectTask(task)}>
-                <input
-                  type="radio"
-                  checked={task.completed}
-                  onChange={() => toggleCompleted(today, index)}
-                />
-                <li className={task.completed ? 'completed' : ''}>{task.text}</li>
+              <div
+                className="TaskBox-flex"
+                key={task.id}
+                onClick={() => selectTask(task)}
+              >
+                {/* Task name */}
+                <div className="Task-main">
+                  <input
+                    type="radio"
+                    checked={task.completed}
+                    onChange={() => toggleCompleted(today, index)}
+                  />
+                  <li className={task.completed ? "completed" : ""}>
+                    {task.text}
+                  </li>
+                </div>
+                {/* Subtasks */}
+                {task.subtasks && task.subtasks.length > 0 && (
+                  <ul className="Subtask-List-inline">
+                    {task.subtasks.map((sub, subIndex) => (
+                      <li key={subIndex} className="subtask-inline">
+                        • {sub}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             ))}
           </div>
+
           <div className="TaskInput">
             <form onSubmit={handleSubmit}>
               <input
@@ -47,13 +71,15 @@ function PersonalTask() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Add Task"
               />
-              <button type="submit"><FaArrowUp /></button>
+              <button type="submit">
+                <FaArrowUp />
+              </button>
             </form>
           </div>
         </div>
 
-        {/*  Show SubTask only if a task was just added */}
-       {SelectedTask && <SubTask/>}
+        {/* Show SubTask modal if a task is selected */}
+        {SelectedTask && <SubTask />}
       </div>
     </div>
   );

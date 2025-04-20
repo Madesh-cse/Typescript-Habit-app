@@ -7,9 +7,9 @@ import { FaArchive } from "react-icons/fa";
 import { PiClockClockwiseBold } from "react-icons/pi";
 import { CgNotes } from "react-icons/cg";
 import { FaHashtag } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
 import { useInputContext } from '../../Context/InputSubmissonContext';
-
-
+import Attachement from './Attachement';
 
 function SubTask() {
 
@@ -97,14 +97,21 @@ function SubTask() {
           <textarea placeholder='Insert Your Notes here'></textarea>
         </div>
         <div className='Subtask-input'>
-          <input type="text" value={subtaskInput} onChange={(e)=>setSubtaskInput(e.target.value)} placeholder='Subtask'/>
-          <button onClick={HandleSubtask}>Add Task</button>
+          <input type="text" value={subtaskInput} onChange={(e)=>setSubtaskInput(e.target.value)} placeholder=' Add a new subtask'/>
+          <button type='submit' onClick={HandleSubtask}><FaArrowUp /></button>
           <ul className='Subtask-List'>
             {currentTask?.subtasks?.map((sub, idx) => (
-              <li key={idx}>{sub}</li>
+              <div className='List-item'> 
+                <label className="round-checkbox">
+                  <input type="checkbox" />
+                  <span className="custom-check"></span>
+               </label>
+                <li key={idx}>{sub}</li>
+              </div>
             ))}
           </ul>
         </div>
+        <Attachement/>
       </div>
     </div>
   );
