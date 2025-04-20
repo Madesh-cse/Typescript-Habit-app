@@ -33,6 +33,8 @@ function Sidebar() {
         (total,work) => total + work.length,0
     )
 
+    const Total = totalTask + WorkCount
+
 
     const [isopen,setopen] = useState<boolean>(false);
     const[SubmittedValue,setsubmittedValue] = useState<string[]>([])
@@ -76,7 +78,7 @@ function Sidebar() {
                         <NavLink to='/weekschedule'>
                             <span><IoCalendarNumberSharp/></span>
                             <span>Next 7 days</span>
-                            <span className='count'>{totalTask}</span>
+                            <span className='count'>{Total}</span>
                         </NavLink>
                     </li>
                     <li>

@@ -6,13 +6,7 @@ import PersonalTaskTools from "./PersonalTaskTools";
 import SubTask from "./SubTask";
 
 function PersonalTask() {
-  const {
-    submittedValue,
-    addSubmisson,
-    toggleCompleted,
-    selectTask,
-    SelectedTask,
-  } = useInputContext();
+  const { submittedValue,addSubmisson,toggleCompleted,selectTask,SelectedTask,} = useInputContext();
   const [input, setInput] = useState("");
 
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
@@ -41,7 +35,7 @@ function PersonalTask() {
                 {/* Task name */}
                 <div className="Task-main">
                   <input
-                    type="radio"
+                    type="checkbox"
                     checked={task.completed}
                     onChange={() => toggleCompleted(today, index)}
                   />
