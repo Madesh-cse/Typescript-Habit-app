@@ -1,8 +1,10 @@
 import { createContext, useContext,useState } from "react"
-
+import { v4 as uuidv4 } from 'uuid';
 interface WorkTask {
+    id:string,
     Work : string,
-    complete:boolean
+    complete:boolean,
+    worksubtasks?:string[]
 }
 
 interface WorkSubmission {
@@ -14,6 +16,8 @@ interface WorkSubmission {
 
     WorkSelectedTask : WorkTask | null
     WorkSelectTask : (worktask:WorkTask) => void
+
+    WorkSubTask : (day:string,taskIndex:number,subtask:string) => void
 }
 
 // default context value has to created 
@@ -45,27 +49,52 @@ export const WorkTaskProvider :React.FC<{children:React.ReactNode}> = ({children
 
     const addWorkSubmission = (day:string,Work:string)=>{
 
-        const newTaskWork:WorkTask = {Work,complete:false}
+        const newTaskWork:WorkTask = { id:uuidv4(),  Work,complete:false}
          // The prev task hold the task in an object
         setWorkTasks(prev=>({
           // [day:string , Task [text,complete]]
           ...prev,
+          // [day]is a dynamic key(hold a days):[cuurent task or text of a day || if no task on a day it is empty[]],otherwise append new task
           [day]:[...(prev[day] || []),newTaskWork]
         }))
     }
 
+    // Toggle the completed status
+    // index is represent the clicked list item
     const toggleWorkCompleted = (day:string,index:number)=>{
         setWorkTasks(prev=>({
+             // The prev task hold the task in an object
           ...prev,
           [day]:prev[day].map((task,i)=>
-            i === index ? {...task,completed:!task.complete}:task
+            i === index ? {...task,completed:!task.complete}:task // unchanged task
           )
         }))
     }
 
     const WorkSelectTask = (task:WorkTask) =>{
        setWorkSelectedTask(task)
-       }
+    }
+
+    const WorkSubTask = (day:string,taskIndex:number,subtask:string)=>{
+        setWorkTasks(prev =>{
+            const updatedTasks = prev[day].map((work,i)=>
+                i === taskIndex ? { ...work, worksubtasks: [...(work.worksubtasks || []), subtask] } : work
+            )
+
+            const updatedValue = {
+                ...prev,
+                [day]: updatedTasks,
+            };
+
+            const updatedTask = updatedTasks[taskIndex];
+            if (WorkSelectedTask && prev[day][taskIndex].id === WorkSelectedTask.id) {
+              setWorkSelectedTask(updatedTask);
+            }
+        
+            return updatedValue;
+        })
+    }
+
 
       return(
         <WorkContext.Provider value={{
@@ -73,9 +102,8 @@ export const WorkTaskProvider :React.FC<{children:React.ReactNode}> = ({children
             addWorkSubmission,
             toggleWorkCompleted,
             WorkSelectedTask,
-            WorkSelectTask
-
-
+            WorkSelectTask,
+            WorkSubTask
         }}>
             {children}
         </WorkContext.Provider>
