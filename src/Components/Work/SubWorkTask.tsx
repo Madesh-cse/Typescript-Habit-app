@@ -9,6 +9,7 @@ import { CgNotes } from "react-icons/cg";
 import { FaHashtag } from "react-icons/fa";
 import { useWorkContext } from '../../Context/WorkInputSubmissionContext';
 import { FaArrowUp } from "react-icons/fa";
+import Attachement from '../Personal/Attachement';
 
 function SubWorkTask() {
   const { WorkSelectedTask, WorkTasks, WorkSubTask } = useWorkContext();
@@ -106,6 +107,7 @@ function SubWorkTask() {
             ))}
           </ul>
         </div>
+        <Attachement/>
       </div>
     </div>
   );
