@@ -11,7 +11,8 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         padding: 20px;
         color: white;
-        overflow-y: auto;
+        overflow-y: scroll;
+        scrollbar-color: rgba(0, 0, 0, 0.434) transparent;
         margin-left: 40px;
 
         .SubTask_header{
@@ -99,9 +100,149 @@
         }
 
         .Subtask-input {
-            li{
+            position: relative;
+            margin-top: 20px;
+
+            input{
+                width:450px;
+                background-color: #2B2B2B;
+                padding: 12px 16px;;
+                color: #CCCCCC;
+                border-radius: 6px;
+                border: none;
+                border:1px solid #c0c0c0;
+                outline: none;
+
+                &:focus{
+                    border-color: #00A9FF;
+                }
+            }
+            ul{
+                margin-top: 15px;
+                list-style-type: none;
+            }
+            button{
+                position: absolute;
+                top:13px;
+                right:20px;
+                background-color: transparent;
+                border: none;
+                outline: none;
+                color:#c0c0c0;
+                font-size: 17px;
+            }
+
+            .List-item{
+                display: flex;
+                width:100%;
                 color:#fff;
+                padding: 12px 15px;
+                margin-top: 10px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+
+                .round-checkbox {
+                    position: relative;
+                    display: inline-block;
+                    cursor: pointer;
+                    padding-left: 30px;
+                    user-select: none;
+                  }
+                  
+                  .round-checkbox input {
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                  }
+                  //shape of checkbox
+                  .round-checkbox .custom-check {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    height: 20px;
+                    width: 20px;
+                    background-color:  #1e1e1e;
+                    border-radius: 50%;
+                    border: 2px solid #aaa;
+                    transition: background-color 0.3s;
+                  }
+                  
+                 
+                  .round-checkbox input:checked ~ .custom-check {
+                    background-color: #2B2B2B;
+                    border-color: #4caf50;
+                  }
+
+                  .custom-check::after {
+                    content: "";
+                    position: absolute;
+                    display: none;
+                    left: 6px;
+                    top: 2px;
+                    width: 6px;
+                    height: 10px;
+                    border: solid white;
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                    color:#fff;
+                  }
+                  // during check tick mark will be show
+                  .round-checkbox input:checked ~ .custom-check::after {
+                    display: block;
+                  }
+                  
+
+                li{
+                    padding-left: 10px;
+                }
+
+                &:hover{
+                    border:1px solid #4e9af1;
+                    cursor: pointer;
+                }
+
             }
         }
+        .Attachment {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+          }
+          
+          .Upload-box {
+            border: 2px dashed #555;
+            padding: 15px 20px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            background-color: #1e1e1e;
+            color: #ccc;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            position: relative;
+          }
+          
+          .Upload-box:hover {
+            border-color: #888;
+          }
+          
+          .Upload-input {
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+          }
+          
+          .Upload-label {
+            z-index: 1;
+            position: relative;
+            pointer-events: none;
+            font-size: 14px;
+        }
+          
     }
 }

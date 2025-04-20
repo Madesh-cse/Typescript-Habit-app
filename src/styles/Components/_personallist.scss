@@ -29,13 +29,22 @@
         overflow-y: auto;
 
         .TaskBox-flex{
-            display: flex;
+            // display: flex;
             width:450px;
             background-color: #2c2c2c;
             color:#fff;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
+
+            .Task-main{
+                display: flex;
+            }
+            .Subtask-List-inline{
+                margin-top: 10px;
+                font-size: 10px;
+                margin-left: 50px;
+            }
         }
 
         li{
