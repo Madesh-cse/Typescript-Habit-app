@@ -11,8 +11,10 @@ import { FaArrowUp } from "react-icons/fa";
 import { useInputContext } from '../../Context/InputSubmissonContext';
 import Attachement from './Attachement';
 
+interface SubtaskProps {}
 
-function SubTask() {
+
+function SubTask({}:SubtaskProps) {
 
   const { SelectedTask,submittedValue,SubTask } = useInputContext();
 
@@ -23,6 +25,7 @@ function SubTask() {
   const [modalOpen, setModalOpen] = useState(false);
   const [reminderDate, setReminderDate] = useState<Date | null>(null);
   const [subtaskInput, setSubtaskInput] = useState("");
+
 
   console.log("SelectedTask subtasks: ", SelectedTask);
 
@@ -52,14 +55,14 @@ function SubTask() {
   }
 
   return (
-    <div className="Subtask">
-      <div className="SubTaskBox">
+    <div  className='Subtask'>
+      <div className={`SubTaskBox ${currentTask?.completed ? 'subtask-blur' : ''}`}>
         <div className='SubTask_header'>
           <div className='SubTask-title'>
             <p><span><IoLockClosedOutline /></span> My list - Personal</p>
           </div>
           <div className='Subtask-extenstion'>
-            <p>Mark as complete</p>
+            {currentTask?.completed ?  <p className='Completed-task'> completed</p> : <p>Mark as complete</p> }
             <p><TbCircleDashedCheck /></p>
             <p><FaArchive /></p>
           </div>

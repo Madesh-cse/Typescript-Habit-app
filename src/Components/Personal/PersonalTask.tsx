@@ -1,12 +1,12 @@
 import "../../styles/Components/_personallist.scss";
 import { useInputContext } from "../../Context/InputSubmissonContext";
 import { useState } from "react";
-import { FaArrowUp } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa"; 
 import PersonalTaskTools from "./PersonalTaskTools";
 import SubTask from "./SubTask";
 
 function PersonalTask() {
-  const { submittedValue,addSubmisson,toggleCompleted,selectTask,SelectedTask,} = useInputContext();
+  const { submittedValue,addSubmisson,toggleCompleted,selectTask,SelectedTask,RemoveTaskList} = useInputContext();
   const [input, setInput] = useState("");
 
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
@@ -34,14 +34,19 @@ function PersonalTask() {
               >
                 {/* Task name */}
                 <div className="Task-main">
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() => toggleCompleted(today, index)}
-                  />
-                  <li className={task.completed ? "completed" : ""}>
-                    {task.text}
-                  </li>
+                  <div className="sub-flex">
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => toggleCompleted(today, index)}
+                    />
+                    <li className={task.completed ? "completed" : ""}>
+                      {task.text}
+                    </li>
+                  </div>
+                  {task.completed && (
+                    <button onClick={()=> RemoveTaskList(today, index)}> X</button>
+                  )}
                 </div>
                 {/* Subtasks */}
                 {task.subtasks && task.subtasks.length > 0 && (
@@ -73,7 +78,7 @@ function PersonalTask() {
         </div>
 
         {/* Show SubTask modal if a task is selected */}
-        {SelectedTask && <SubTask />}
+      {SelectedTask && <SubTask  />}
       </div>
     </div>
   );
