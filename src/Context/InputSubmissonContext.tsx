@@ -21,6 +21,10 @@ interface InputSubmissonType {
     // method
     selectTask : (task:Task)=>void;
     SubTask : (day:string,taskIndex:number,subtask:string)=>void;
+
+    // Remove Functionality 
+
+    RemoveTaskList : (day:string,index:number)=>void;
 }
 
 
@@ -72,6 +76,27 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
      setSelectedTask(task)
     }
 
+    // Remove Feature 
+
+    const RemoveTaskList = (day:string,index:number)=>{
+      setSubmittedValue(prev=>{
+        // copy the original task array because we dont want to directly mutated the state
+        const updatedTask = [...(prev[day] || [])]
+
+        const removedTask = updatedTask[index];
+        if(SelectedTask && removedTask.id === SelectedTask.id){
+          setSelectedTask(null)
+        }
+        // splice(index value,remove element)
+        updatedTask.splice(index,1)
+        // return new updated state after removing the selected task
+        return{
+          ...prev,
+          [day]:updatedTask
+        }
+      })
+    }
+
     const SubTask = (day: string, taskIndex: number, subtask: string) => {
       // prev holds the task object 
       setSubmittedValue(prev => {
@@ -97,7 +122,6 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
       });
     };
     
-
     return(
         <InputContext.Provider 
           value=
@@ -106,7 +130,8 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
             ,toggleCompleted
             , SelectedTask
             ,selectTask,
-            SubTask
+            SubTask,
+            RemoveTaskList
           }}
           >
           {children}

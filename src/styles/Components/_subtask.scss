@@ -2,7 +2,7 @@
 
 .Subtask{
     margin-top: 8px;
-
+    
     .SubTaskBox{
         width: 500px;
         height: 595px;
@@ -14,6 +14,20 @@
         overflow-y: scroll;
         scrollbar-color: rgba(0, 0, 0, 0.434) transparent;
         margin-left: 40px;
+
+        &.subtask-blur {
+            background-color: rgba(8, 8, 8, 0.768); // frosted dark glass
+            // backdrop-filter: blur(1px) saturate(20%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            // box-shadow: 0 8px 32px rgba(21, 21, 21, 0.37);
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+          }
+          
+          &.subtask-blur * {
+            opacity: 0.55;
+            transition: opacity 0.3s ease-in-out;
+          }
 
         .SubTask_header{
             display: flex;
@@ -30,6 +44,10 @@
                     margin-right: 15px;
                     font-size: 12px;
                     color:#c0c0c0;
+                }
+
+                .Completed-task{
+                    color:#4e9af1;
                 }
             }
         }
