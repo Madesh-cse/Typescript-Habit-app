@@ -1,5 +1,5 @@
 import '../../styles/Components/_sidebar.scss'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useRef } from 'react';
 import { IoSettingsOutline } from "react-icons/io5";
 import { TbCircleDashedCheck } from "react-icons/tb";
@@ -21,9 +21,18 @@ function Sidebar() {
 
     const [isToogle,setisToogle] = useState(true)
 
+    useEffect(() => {
+        const screenWidth = window.innerWidth;
+        console.log("Screen width on mount:", screenWidth); // 🔍 Debug
+        if (screenWidth < 1024) {
+          setisToogle(false); // Close sidebar initially on small screens
+        }
+      }, []);
+
     const HandleOpen = ()=>{
         setisToogle((prev)=>!prev)
     }
+
 
     const totalTask = Object.values(submittedValue).reduce(
         (total,task)=> total + task.length ,0
@@ -69,27 +78,27 @@ function Sidebar() {
                  <ul>
                     <li>
                         <NavLink to='/'className={({ isActive }) => isActive ? "active" : undefined}>
-                            <span><TbCircleDashedCheck/></span>
+                            <span className='icon'><TbCircleDashedCheck/></span>
                             <span>My day</span>
                             <span className='count'>{totalTask}</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to='/weekschedule'>
-                            <span><IoCalendarNumberSharp/></span>
+                            <span className='icon'><IoCalendarNumberSharp/></span>
                             <span>Next 7 days</span>
                             <span className='count'>{Total}</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to='/AllTask'>
-                            <span><FaTasks/>    </span>
+                            <span className='icon'><FaTasks/>    </span>
                             <span>All my task</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to='/Calender'>
-                            <span><IoCalendarNumberSharp/></span>
+                            <span className='icon'><IoCalendarNumberSharp/></span>
                             <span>My calender</span>
                         </NavLink>
                     </li>
