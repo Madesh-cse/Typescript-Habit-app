@@ -47,13 +47,13 @@ function SubWorkTask() {
 
   return (
     <div className="Subtask">
-      <div className="SubTaskBox">
+      <div className={`SubTaskBox ${currentTask?.complete ? 'subtask-blur' : ''}`}>
         <div className='SubTask_header'>
           <div className='SubTask-title'>
             <p><span><IoLockClosedOutline /></span> My list - Personal</p>
           </div>
           <div className='Subtask-extenstion'>
-            <p>Mark as complete</p>
+            {currentTask?.complete ?  <p> completed</p>: <p>Mark as completed</p> }
             <p><TbCircleDashedCheck /></p>
             <p><FaArchive /></p>
           </div>

@@ -18,6 +18,10 @@ interface WorkSubmission {
     WorkSelectTask : (worktask:WorkTask) => void
 
     WorkSubTask : (day:string,taskIndex:number,subtask:string) => void
+
+    // Remove TaskList
+
+    WorkRemoveTaskList : (day:string,index:number)=>void;
 }
 
 // default context value has to created 
@@ -66,13 +70,34 @@ export const WorkTaskProvider :React.FC<{children:React.ReactNode}> = ({children
              // The prev task hold the task in an object
           ...prev,
           [day]:prev[day].map((task,i)=>
-            i === index ? {...task,completed:!task.complete}:task // unchanged task
+            i === index ? {...task,complete:!task.complete}:task // unchanged task
           )
         }))
     }
 
     const WorkSelectTask = (task:WorkTask) =>{
        setWorkSelectedTask(task)
+    }
+
+
+    const  WorkRemoveTaskList = (day:string,index:number)=>{
+        setWorkTasks(prev=>{
+            // we are copy the original day on the specifi day other wise it is an empty array
+            const workupdatedTask = [...(prev[day] || [])]
+            const removeWork = workupdatedTask[index]
+
+            if(WorkSelectedTask && removeWork.id === WorkSelectedTask.id){
+                setWorkSelectedTask(null)
+            }
+            // splice(index value,remove count)
+            workupdatedTask.splice(index,1)
+
+            // return the updated task object after removing the selected task
+            return{
+                ...prev,
+                [day]:workupdatedTask
+            }
+        })
     }
 
     const WorkSubTask = (day:string,taskIndex:number,subtask:string)=>{
@@ -103,7 +128,8 @@ export const WorkTaskProvider :React.FC<{children:React.ReactNode}> = ({children
             toggleWorkCompleted,
             WorkSelectedTask,
             WorkSelectTask,
-            WorkSubTask
+            WorkSubTask,
+            WorkRemoveTaskList
         }}>
             {children}
         </WorkContext.Provider>
