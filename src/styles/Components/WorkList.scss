@@ -23,12 +23,31 @@
         color: white;
         overflow-y: auto;
 
+        &.subtask-blur {
+            background-color: rgba(8, 8, 8, 0.768); // frosted dark glass
+            // backdrop-filter: blur(1px) saturate(20%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            // box-shadow: 0 8px 32px rgba(21, 21, 21, 0.37);
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+          }
+          
+          &.subtask-blur * {
+            opacity: 0.55;
+            transition: opacity 0.3s ease-in-out;
+          }
+
+
         .Work-main{
             display: flex;
+            justify-content: space-between;
+
+            .sub-flex{
+                display: flex;
+            }
         }
 
         .TaskBox-flex{
-            // display: flex;
             width:450px;
             background-color: #2c2c2c;
             color:#fff;
@@ -47,7 +66,7 @@
             list-style-type: none;
         }
 
-        input[type='radio'] {
+        input[type='checkbox'] {
             accent-color: #4caf50;
             transform: scale(1.2);
             margin-right: 20px;

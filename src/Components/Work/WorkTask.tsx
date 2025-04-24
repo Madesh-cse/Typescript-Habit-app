@@ -5,13 +5,7 @@ import SubWorkTask from "./SubWorkTask";
 import { useState } from "react";
 
 function WorkTask() {
-  const {
-    WorkTasks,
-    addWorkSubmission,
-    toggleWorkCompleted,
-    WorkSelectTask,
-    WorkSelectedTask,
-  } = useWorkContext();
+  const { WorkTasks,addWorkSubmission,toggleWorkCompleted,WorkSelectTask,WorkSelectedTask,WorkRemoveTaskList } = useWorkContext();
 
   const [input, setinput] = useState("");
 
@@ -39,14 +33,19 @@ function WorkTask() {
               <div className="" key={index}>
                 <div className="TaskBox-flex" onClick={() => WorkSelectTask(task)}>
                   <div className="Work-main"> 
-                    <input
-                      type="radio"
-                      checked={task.complete}
-                      onChange={() => toggleWorkCompleted(todayWork, index)}
-                    />
-                    <li className={task.complete ? "completed" : ""}>
-                      {task.Work}
-                    </li>
+                    <div className="sub-flex"> 
+                      <input
+                        type="checkbox"
+                        checked={task.complete}
+                        onChange={() => toggleWorkCompleted(todayWork, index)}
+                      />
+                      <li className={task.complete ? "completed" : ""}>
+                        {task.Work}
+                      </li>
+                    </div>
+                    {task.complete && (
+                      <button type="submit" onClick={()=>WorkRemoveTaskList(todayWork,index)}> X</button>
+                    )}
                   </div>
                   {task.worksubtasks && task.worksubtasks.length > 0 && (
                   <ul className="Subtask-List-inline">
