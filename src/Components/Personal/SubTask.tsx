@@ -45,7 +45,7 @@ function SubTask({}:SubtaskProps) {
     selectedday && taskIndex !== -1
       ? submittedValue[selectedday][taskIndex]
     : null;
-  console.log(currentTask) 
+  console.log('currenttask',currentTask) 
 
   const HandleSubtask = ()=>{
     if(subtaskInput.trim() && selectedday!==undefined && taskIndex!==-1){

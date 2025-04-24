@@ -14,17 +14,24 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    // outline: 2px solid #ccc;
+    // outline-offset: -2px;
 }
 body{
     background-image: url('../assets/Background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100%;
+    min-height: 100vh; // Use viewport height instead of auto
+    width: 100vw; // Use viewport width
     margin: 0;
+    padding: 0;
     font-family: sans-serif;
-//    background-image: url('https://images.unsplash.com/photo-1612441804231-77a36b284856?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-//https://c4.wallpaperflare.com/wallpaper/168/21/261/mercedes-amg-gt-r-edo-competition-2018-4k-wallpaper-preview.jpg
-//https://wallpaper.forfun.com/fetch/7b/7bd2a644e1a61abdc68e1e380200ae23.jpeg
-//https://wallpapercave.com/wp/wp9241092.jpg
+    outline: 2px solid green;
+    background-attachment: fixed; 
+    overflow-x: hidden;
+  
+  @media (max-width: 768px) {
+    background-size: 100% 100%; 
+  }
 }
