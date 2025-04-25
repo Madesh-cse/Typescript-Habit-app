@@ -12,7 +12,7 @@ import { FaArrowUp } from "react-icons/fa";
 import Attachement from '../Personal/Attachement';
 
 function SubWorkTask() {
-  const { WorkSelectedTask, WorkTasks, WorkSubTask } = useWorkContext();
+  const { WorkSelectedTask, WorkTasks, WorkSubTask,subtaskCompletion,WorkToggleSubTask } = useWorkContext();
 
   if (!WorkSelectedTask) {
     return null;
@@ -44,6 +44,14 @@ function SubWorkTask() {
       setWorkSubInput('');
     }
   };
+
+  // subtask completed progress level
+   const taskId = currentTask?.id || '';
+    // {["task-123"]: true.....}
+    const subtaskStatus = Array.isArray(subtaskCompletion[taskId])? subtaskCompletion[taskId]: [];
+   const total = currentTask?.worksubtasks?.length || 0;
+   const completed = subtaskStatus.filter(Boolean).length;
+   const progress = total ? Math.round((completed / total) * 100) : 0;
 
   return (
     <div className="Subtask">
@@ -92,6 +100,13 @@ function SubWorkTask() {
           <textarea placeholder='Insert Your Notes here'></textarea>
         </div>
 
+        <div className="progress-container">
+          <label>Progress</label>
+          <progress max={100} value={progress}></progress>
+          <span>{progress}%</span>
+        </div>
+
+
         <div className='Subtask-input'>
           <input type="text" value={WorkSubInput} onChange={(e) => setWorkSubInput(e.target.value)} placeholder=' Add a new subtask' />
           <button type='submit' onClick={HandleSubtask}><FaArrowUp /></button>
@@ -99,7 +114,7 @@ function SubWorkTask() {
             {currentTask?.worksubtasks?.map((sub, idx) => (
               <div className='List-item'> 
                 <label className="round-checkbox">
-                  <input type="checkbox" />
+                  <input type="checkbox" checked={subtaskStatus[idx] || false} onChange={()=>selectedDay && WorkToggleSubTask(selectedDay,taskindex,idx) } />
                   <span className="custom-check"></span>
                </label>
                 <li key={idx}>{sub}</li>
