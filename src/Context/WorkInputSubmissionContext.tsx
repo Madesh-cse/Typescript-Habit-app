@@ -110,52 +110,61 @@
                 return updated
             })
         }
-
-        const WorkSubTask = (day:string,taskIndex:number,subtask:string)=>{
-            setWorkTasks(prev =>{
-                const updatedTasks = prev[day].map((work,i)=>
-                    i === taskIndex ? { ...work, worksubtasks: [...(work.worksubtasks || []), subtask] } : work
-                )
-
-                const updatedValue = {
-                    ...prev,
-                    [day]: updatedTasks,
-                };
-
-                const updatedTask = updatedTasks[taskIndex];
-                if (WorkSelectedTask && prev[day][taskIndex].id === WorkSelectedTask.id) {
+        const WorkSubTask = (day: string, taskIndex: number, subtask: string) => {
+            setWorkTasks((prev) => {
+              const updatedTasks = prev[day].map((task, i) =>
+                i === taskIndex
+                  ? { ...task, worksubtasks: [...(task.worksubtasks || []), subtask] }
+                  : task
+              );
+          
+              const updatedValue = {
+                ...prev,
+                [day]: updatedTasks,
+              };
+          
+              const updatedTask = updatedTasks[taskIndex];
+              if (WorkSelectedTask && prev[day][taskIndex].id === WorkSelectedTask.id) {
                 setWorkSelectedTask(updatedTask);
-                }
+              }
+          
+              const taskId = updatedTask.id;
+              const currentStatus = subtaskCompletion[taskId] || [];
+              const updatedCompletion = [...currentStatus, false];
+              setSubtaskCompletion((prev) => ({
+                ...prev,
+                [taskId]: updatedCompletion,
+              }));
+          
+              return updatedValue;
+            });
+          };
+          
 
-                // update subtaskCompletion
-
-                const taskId = updatedTask.id
-                const currentStatus = subtaskCompletion[taskId] || []
-                const updateCompleted = {...currentStatus}
-                setSubtaskCompletion((prev)=>({
-                    ...prev,
-                    [taskId]:updateCompleted
-                }))
-
-                return updatedValue;
-            })
-        }
-
-        const WorkToggleSubTask = (day: string, taskIndex: number, subIndex: number)=>{
-            // we getting a id of selected task on the specific day 
-            const taskId = WorkTasks[day][taskIndex].id
-            setSubtaskCompletion((prev)=>{
-                const current = Array.isArray(prev[taskId]) ? prev[taskId] : [];
-                const update = current.map((status,id)=>
-                    id === subIndex ? !status : status
-                )
-
-                return {
-                    ...prev,
-                    [taskId]:update
-                }
-            })
-        }
+          const WorkToggleSubTask = (day: string, taskIndex: number, subIndex: number) => {
+            // we getting a id of selected task on the specifi day
+            const taskId = WorkTasks[day][taskIndex].id;
+          
+            setSubtaskCompletion((prev) => {
+              const current = Array.isArray(prev[taskId]) ? prev[taskId] : [];
+          
+              // Ensure array has enough length (fix edge cases)
+              const safeCurrent = [...current];
+              while (safeCurrent.length <= subIndex) {
+                safeCurrent.push(false);
+              }
+          
+              const updated = safeCurrent.map((status, i) =>
+                i === subIndex ? !status : status
+              );
+          
+              return {
+                ...prev,
+                [taskId]: updated,
+              };
+            });
+          };
+          
 
 
 

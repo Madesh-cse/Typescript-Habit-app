@@ -20,11 +20,16 @@ interface InputSubmissonType {
     SelectedTask : Task | null;
     // method
     selectTask : (task:Task)=>void;
+
     SubTask : (day:string,taskIndex:number,subtask:string)=>void;
+    ToggleSubTask : (day:string,taskIndex:number,subIndex:number)=>void
+
 
     // Remove Functionality 
-
     RemoveTaskList : (day:string,index:number)=>void;
+
+    // {["task-123"]: true.....}
+    taskCompletion: { [taskId: string]: boolean[] };
 }
 
 
@@ -48,6 +53,9 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
     const [submittedValue,setSubmittedValue] = useState<{ [day: string]: Task[] }>({});
     // update a state with a interface Task structure
     const [ SelectedTask, setSelectedTask] = useState<Task | null>(null);
+    // add a state for selecting the subtask 
+
+    const [subtaskCompletion,setsubtaskCompletion] = useState< {[taskId:string]:boolean[]}>({})
 
     //Personal Task
     // The submitted value is append to an array 
@@ -90,10 +98,16 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
         // splice(index value,remove element)
         updatedTask.splice(index,1)
         // return new updated state after removing the selected task
-        return{
+        const update = {
           ...prev,
           [day]:updatedTask
         }
+
+        const updateTaskCompletion = {...subtaskCompletion}
+        delete updateTaskCompletion[removedTask.id]
+        setsubtaskCompletion(updateTaskCompletion)
+
+        return update
       })
     }
 
@@ -117,10 +131,41 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
         if (SelectedTask && prev[day][taskIndex].id === SelectedTask.id) {
           setSelectedTask(updatedTask);
         }
-    
+
+        const PersonaltaskId = updatedTask.id;
+        const SubTaskcurrentStatus = subtaskCompletion[PersonaltaskId] || [];
+        const updatedCompletion = [...SubTaskcurrentStatus, false];
+
+        setsubtaskCompletion((prev) => ({
+          ...prev,
+          [PersonaltaskId]: updatedCompletion,
+        }));
+        
         return updatedValue;
       });
     };
+
+    const ToggleSubTask = (day:string,taskIndex:number,subIndex:number)=>{
+      const taskId = submittedValue[day][taskIndex].id
+
+      setsubtaskCompletion((prev)=>{
+        const currentTask = Array.isArray(prev[taskId]) ? prev[taskId] : [];
+
+        const safeCurrent = [...currentTask];
+        while (safeCurrent.length <= subIndex) {
+          safeCurrent.push(false);
+        }
+
+        const updated = safeCurrent.map((status, i) =>
+          i === subIndex ? !status : status
+        );
+    
+        return {
+          ...prev,
+          [taskId]: updated,
+        };
+      })
+    }
     
     return(
         <InputContext.Provider 
@@ -131,7 +176,9 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
             , SelectedTask
             ,selectTask,
             SubTask,
-            RemoveTaskList
+            RemoveTaskList,
+            ToggleSubTask,
+            taskCompletion: subtaskCompletion 
           }}
           >
           {children}
