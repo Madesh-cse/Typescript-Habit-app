@@ -53,6 +53,9 @@ function SubWorkTask() {
    const completed = subtaskStatus.filter(Boolean).length;
    const progress = total ? Math.round((completed / total) * 100) : 0;
 
+   console.log("Current task ID:", taskId);
+   console.log("Subtask statuses:", subtaskStatus);   
+
   return (
     <div className="Subtask">
       <div className={`SubTaskBox ${currentTask?.complete ? 'subtask-blur' : ''}`}>
@@ -113,10 +116,11 @@ function SubWorkTask() {
           <ul className='Subtask-List'>
             {currentTask?.worksubtasks?.map((sub, idx) => (
               <div className='List-item'> 
-                <label className="round-checkbox">
-                  <input type="checkbox" checked={subtaskStatus[idx] || false} onChange={()=>selectedDay && WorkToggleSubTask(selectedDay,taskindex,idx) } />
-                  <span className="custom-check"></span>
-               </label>
+                <input
+                  type="checkbox"
+                  checked={subtaskStatus[idx] || false}
+                  onChange={() => selectedDay && WorkToggleSubTask(selectedDay, taskindex, idx)}
+                />
                 <li key={idx}>{sub}</li>
               </div>
             ))}

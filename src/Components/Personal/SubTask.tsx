@@ -16,7 +16,7 @@ interface SubtaskProps {}
 
 function SubTask({}:SubtaskProps) {
 
-  const { SelectedTask,submittedValue,SubTask } = useInputContext();
+  const { SelectedTask,submittedValue,SubTask,taskCompletion,ToggleSubTask } = useInputContext();
 
   if(!SelectedTask){
     return null
@@ -53,6 +53,14 @@ function SubTask({}:SubtaskProps) {
       setSubtaskInput('')
     }
   }
+
+  // subtask completed progress level
+  const taskId = currentTask?.id || '';
+  // {["task-123"]: true.....}
+  const subtaskStatus = Array.isArray(taskCompletion[taskId] )? taskCompletion[taskId]: [];
+  const total = currentTask?.subtasks?.length || 0;
+  const completed = subtaskStatus.filter(Boolean).length;
+  const progress = total ? Math.round((completed / total) * 100) : 0;
 
   return (
     <div  className='Subtask'>
@@ -100,16 +108,24 @@ function SubTask({}:SubtaskProps) {
           <h3>Notes</h3>
           <textarea placeholder='Insert Your Notes here'></textarea>
         </div>
+
+        <div className="progress-container">
+          <label>Progress</label>
+          <progress max={100} value={progress}></progress>
+          <span>{progress}%</span>
+        </div>
+
         <div className='Subtask-input'>
           <input type="text" value={subtaskInput} onChange={(e)=>setSubtaskInput(e.target.value)} placeholder=' Add a new subtask'/>
           <button type='submit' onClick={HandleSubtask}><FaArrowUp /></button>
           <ul className='Subtask-List'>
             {currentTask?.subtasks?.map((sub, idx) => (
               <div className='List-item'> 
-                <label className="round-checkbox">
-                  <input type="checkbox" />
-                  <span className="custom-check"></span>
-               </label>
+                <input
+                  type="checkbox"
+                  checked={subtaskStatus[idx] || false}
+                  onChange={() => selectedday && ToggleSubTask(selectedday,taskIndex,idx) }
+                />
                 <li key={idx}>{sub}</li>
               </div>
             ))}
