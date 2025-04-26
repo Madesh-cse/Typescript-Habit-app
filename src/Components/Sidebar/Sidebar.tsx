@@ -80,7 +80,7 @@ function Sidebar() {
                         <NavLink to='/'className={({ isActive }) => isActive ? "active" : undefined}>
                             <span className='icon'><TbCircleDashedCheck/></span>
                             <span>My day</span>
-                            <span className='count'>{totalTask}</span>
+                            <span className='count'>{Total}</span>
                         </NavLink>
                     </li>
                     <li>
