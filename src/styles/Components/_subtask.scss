@@ -140,41 +140,15 @@
                 list-style-type: none;
             }
             button{
-                position: absolute;
-                top:13px;
-                right:20px;
-                background-color: transparent;
-                border: none;
-                outline: none;
-                color:#c0c0c0;
-                font-size: 17px;
+              position: absolute;
+              top:13px;
+              right:20px;
+              background-color: transparent;
+              border: none;
+              outline: none;
+              color:#c0c0c0;
+              font-size: 17px;
             }
-
-            .progress-container {
-              width:100%;
-              border:1px solid red;
-              display: flex ;
-              align-items: center;
-              gap: 0.5rem;
-            
-              progress {
-                width: 100%;
-                height: 10px;
-                border-radius: 5px;
-                appearance: none;
-              }
-            
-              progress::-webkit-progress-bar {
-                background-color: #eee;
-                border-radius: 5px;
-              }
-            
-              progress::-webkit-progress-value {
-                background-color: #4caf50;
-                border-radius: 5px;
-              }
-            }
-
             .List-item {
               display: flex;
               align-items: center;
@@ -209,6 +183,31 @@
                 border:1px solid #4e9af1;
               }
             }
+        }
+        .progress-container {
+          width:100%;
+          // display: flex ;
+          align-items: center;
+          gap: 0.5rem;
+          margin: 15px 0;
+        
+          progress {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            -webkit-appearance: none;
+            appearance: none;
+          }
+        
+          progress::-webkit-progress-bar {
+            background-color: #eee;
+            border-radius: 5px;
+          }
+        
+          progress::-webkit-progress-value {
+            background-color: #4caf50;
+            border-radius: 5px;
+          }
         }
         .Attachment {
             margin-top: 40px;

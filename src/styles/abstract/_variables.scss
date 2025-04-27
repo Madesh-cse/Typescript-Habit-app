@@ -1,12 +1,41 @@
+// Global Variable
+$color-white:#fff;
+$color-silver:#c0c0c0;
+$border-circle:50%;
+$font-san:sans-serif;
+$postion-absolute:absolute;
+
 // HOME PAGE
-// SIDEBAR 
+// SIDEBAR COMPONENT
 
 $background-color:rgba(0, 0, 0, .6);
 $box-shadow:0 4px 30px rgba(0, 0, 0, 0.1);
+$display-none:none;
+$premium-border:blue;
+
 
 // HOME PAGE
-// MAIN CONTENT
+// MAIN COMPONENT
 
 $Title-color:#fff;
 $font-size:2rem;
 $margin-top:20px;
+$main-font-size:15px;
+
+
+// HOME PAGE 
+// SUGGESTION COMPONENT
+
+$sugg-background-color:#000;
+$sugg-border-box-hover:rgb(0, 85, 255);
+$sugg-margin-left:15px;
+
+// PERSONAL TASK COMPONENT
+$personal-box-shadow:0 0 10px rgba(0, 0, 0, 0.3);
+$personal-border-radius:12px;
+$personal-box-input-background: #1c1c1e;
+$personal-accent-color:#4caf50;
+
+$personal-taskInput-background: #2c2c2c;
+$personal-taskInput-input-background:#2B2B2B;
+$personal-taskInput-color: #CCCCCC;

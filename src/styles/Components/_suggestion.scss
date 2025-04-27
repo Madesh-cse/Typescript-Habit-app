@@ -11,13 +11,13 @@
             @include mixins.flex-type();
             font-size: 17px;
             color:vars.$Title-color;
-            font-family: sans-serif;
+            font-family: vars.$font-san;
             margin-top: 10px;
         }
         .tools-2{
-            border:1px solid #000;
+            border:1px solid vars.$sugg-background-color;
             padding: 10px 10px;
-            background-color: #000;
+            background-color:vars.$sugg-background-color;
             border-radius: 20px;
     
             span{
@@ -35,16 +35,16 @@
         height: 40px;
         background-color: transparent;
         border: none;
-        border-bottom: 1px solid #c0c0c0;
-        color:#fff;
+        border-bottom: 1px solid vars.$color-silver;
+        color:vars.$color-white;
         font-size: 18px;
         outline: none;
        }
        span{
-        position: absolute;
+        position: vars.$postion-absolute;
         top:18px;
         right:20px;
-        color:#fff;
+        color:vars.$color-white;
         font-size:18px;
        }
     }
@@ -58,29 +58,28 @@
             width:320px;
             height:auto;
             background-color: rgba(0, 0, 0, 0.545);
-            color:#fff;
+            color:vars.$color-white;
             display: flex;
             padding: 20px 15px;
-            margin-top: 20px;
+            margin-top: vars.$margin-top;
             border-radius: 10px;
-            font-family: sans-serif;
-            border:1px solid #000;
+            font-family: vars.$font-san;
+            border:1px solid vars.$sugg-background-color;
             cursor: pointer;
 
             .Suggestion-box:hover{
-                border: 1px solid rgb(0, 85, 255) ;
+                border: 1px solid vars.$sugg-border-box-hover ;
             }
-
             .addition-feature{
                 margin-top: 10px;
-                color:rgb(0, 85, 255)
+                color:vars.$sugg-border-box-hover;
             }
 
             .list-name{
-                margin-left: 15px;
+                margin-left: vars.$sugg-margin-left;
 
                 li{
-                    margin-top: 15px;
+                    margin-top: vars.$sugg-margin-left;
                 }
             }
         }
