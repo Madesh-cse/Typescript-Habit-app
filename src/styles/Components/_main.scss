@@ -8,15 +8,15 @@
     // border:1px solid red;
 
     h1{
-        font-family: sans-serif;
+        font-family:vars.$font-san;
         font-size:vars.$font-size;
         color:vars.$Title-color;
         padding-bottom: 10px;
     }
     p{
         font-size:vars.$font-size;
-        color:#fff;
-        font-family: sans-serif;
+        color:vars.$color-white;
+        font-family: vars.$font-san;
     }
 
     .Dynamic-day{
@@ -44,13 +44,13 @@
             margin:20px 15px 0 0;
             font-size: 12px;
             text-decoration: none;
-            font-family: sans-serif;
-            color:#0000ff;
+            font-family: vars.$font-san;
+            color:vars.$premium-border;
         }
     }
 
     .InputTasks{
-        position: absolute;
+        position: vars.$postion-absolute;
         bottom: 30px;
         left:40px;
 
@@ -60,18 +60,18 @@
             background-color: vars.$background-color;
             box-shadow: vars.$box-shadow;
             backdrop-filter: blur(2px);
-            border:1px solid #c0c0c0;
-            color:#fff;
+            border:1px solid vars.$color-silver;
+            color:vars.$color-white;
             border-radius: 5px;
             padding-left: 15px;
-            font-size: 15px;
+            font-size: vars.$main-font-size;
         }
 
         button{
-            position: absolute;
+            position: vars.$postion-absolute;
             bottom: 10px;
             right:10px;
-            font-size: 15px;
+            font-size: vars.$main-font-size;
         }
     }
 }
