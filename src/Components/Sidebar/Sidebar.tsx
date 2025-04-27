@@ -8,6 +8,7 @@ import { FaTasks } from "react-icons/fa";
 import { IoLockClosedOutline } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa6";
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { RiContactsLine } from "react-icons/ri";
 import { NavLink } from 'react-router-dom';
 import Modal from '../Modal/ListModal';
 import Mylist from './Mylist';
@@ -70,50 +71,62 @@ function Sidebar() {
                         <p>Free Plan</p>
                     </div>
                     <div className="sidebar-toggle" onClick={HandleOpen}>
-                       {isToogle ? <FaTimes /> : <FaBars />}
+                      <p> {isToogle ? <FaTimes /> : <FaBars />}</p>
                     </div>
                 </div>
                <button className='preminum-btn'>Go Preminum</button>
-               <div className='sidebar-list'>
-                 <ul>
-                    <li>
-                        <NavLink to='/'className={({ isActive }) => isActive ? "active" : undefined}>
-                            <span className='icon'><TbCircleDashedCheck/></span>
-                            <span>My day</span>
-                            <span className='count'>{Total}</span>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/weekschedule'>
-                            <span className='icon'><IoCalendarNumberSharp/></span>
-                            <span>Next 7 days</span>
-                            <span className='count'>{Total}</span>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/AllTask'>
-                            <span className='icon'><FaTasks/>    </span>
-                            <span>All my task</span>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/Calender'>
-                            <span className='icon'><IoCalendarNumberSharp/></span>
-                            <span>My calender</span>
-                        </NavLink>
-                    </li>
-                 </ul>
-               </div>
-               <div className='toggle-sidebar'>
-                    <div className='toggle-sidebar-flex'>
-                        <div className='toogle-title'>
-                            <p onClick={HandleToggleFunction}>My lists  <span><IoLockClosedOutline/></span></p>
-                        </div>
-                        <p className='toggle-btn' onClick={(()=>ref.current?.openModal())}><FaPlus/></p>
+               <div className='container'> 
+                    <div className='sidebar-list'>
+                        <ul>
+                            <li>
+                                <NavLink to='/'className={({ isActive }) => isActive ? "active" : undefined}>
+                                    <span className='icon'><TbCircleDashedCheck/></span>
+                                    <span>My day</span>
+                                    <span className='count'>{Total}</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/weekschedule'>
+                                    <span className='icon'><IoCalendarNumberSharp/></span>
+                                    <span>Next 7 days</span>
+                                    <span className='count'>{Total}</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/AllTask'>
+                                    <span className='icon'><FaTasks/>    </span>
+                                    <span>All my task</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/Calender'>
+                                    <span className='icon'><IoCalendarNumberSharp/></span>
+                                    <span>My calender</span>
+                                </NavLink>
+                            </li>
+                        </ul>
                     </div>
-                    {!isopen ? <Mylist listContent = {SubmittedValue} WorkCount = {WorkCount}/>:''}
-               </div>
-            </div>
+                    <div className='toggle-sidebar'>
+                        <div className='toggle-sidebar-flex'>
+                            <div className='toogle-title'>
+                                <p onClick={HandleToggleFunction}>My lists  <span><IoLockClosedOutline/></span></p>
+                            </div>
+                            <p className='toggle-btn' onClick={(()=>ref.current?.openModal())}><FaPlus/></p>
+                        </div>
+                        {!isopen ? <Mylist listContent = {SubmittedValue} WorkCount = {WorkCount}/>:''}
+                    </div>
+                </div>
+                {isToogle && ( <hr />)} 
+                {isToogle && (
+                    <div className='Shared-Space'>
+                        <div className='share-container'>
+                            <p className='icon'><RiContactsLine/></p>
+                            <p className='content'>Add shared space</p>
+                        </div>
+                    </div>
+                )}
+
+            </div> 
         </aside>
         <Modal ref={ref} onSubmit={(HandleSubmite)}/>
     </div>

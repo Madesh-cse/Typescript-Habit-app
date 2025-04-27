@@ -12,7 +12,7 @@ function DisplayContent() {
           tasks.map((task, index) => (
             <div className="Content-box" key={`${day}-${index}`}>
               <div className="radio-input">
-                <input
+                <input  
                   type="radio"
                   checked={task.completed}
                   onChange={() => toggleCompleted(day, index)}
