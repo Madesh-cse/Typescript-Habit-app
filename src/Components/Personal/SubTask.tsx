@@ -110,9 +110,8 @@ function SubTask({}:SubtaskProps) {
         </div>
 
         <div className="progress-container">
-          <label>Progress</label>
+          <label>subtask  <span>{progress}%</span></label>
           <progress max={100} value={progress}></progress>
-          <span>{progress}%</span>
         </div>
 
         <div className='Subtask-input'>

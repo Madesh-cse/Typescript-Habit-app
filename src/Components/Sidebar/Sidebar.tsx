@@ -25,7 +25,7 @@ function Sidebar() {
     useEffect(() => {
         const screenWidth = window.innerWidth;
         console.log("Screen width on mount:", screenWidth); // 🔍 Debug
-        if (screenWidth < 1024) {
+        if (screenWidth < 768) {
           setisToogle(false); // Close sidebar initially on small screens
         }
       }, []);
@@ -71,7 +71,7 @@ function Sidebar() {
                         <p>Free Plan</p>
                     </div>
                     <div className="sidebar-toggle" onClick={HandleOpen}>
-                      <p> {isToogle ? <FaTimes /> : <FaBars />}</p>
+                      <p> {isToogle ? <FaTimes  color='white'/> : <FaBars color='white' />}</p>
                     </div>
                 </div>
                <button className='preminum-btn'>Go Preminum</button>

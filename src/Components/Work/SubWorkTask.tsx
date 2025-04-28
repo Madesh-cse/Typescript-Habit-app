@@ -104,9 +104,8 @@ function SubWorkTask() {
         </div>
 
         <div className="progress-container">
-          <label>Progress</label>
+          <label>Progress <span>{progress}%</span></label>
           <progress max={100} value={progress}></progress>
-          <span>{progress}%</span>
         </div>
 
 

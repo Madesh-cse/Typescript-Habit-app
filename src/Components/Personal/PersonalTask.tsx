@@ -45,7 +45,7 @@ function PersonalTask() {
                     </li>
                   </div>
                   {task.completed && (
-                    <button onClick={()=> RemoveTaskList(today, index)}> X</button>
+                    <button type="submit" onClick={()=> RemoveTaskList(today, index)}> X</button>
                   )}
                 </div>
                 {/* Subtasks */}
