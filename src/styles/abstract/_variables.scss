@@ -4,6 +4,7 @@ $color-silver:#c0c0c0;
 $border-circle:50%;
 $font-san:sans-serif;
 $postion-absolute:absolute;
+$postion-relative:relative;
 
 // HOME PAGE
 // SIDEBAR COMPONENT
@@ -30,6 +31,10 @@ $sugg-background-color:#000;
 $sugg-border-box-hover:rgb(0, 85, 255);
 $sugg-margin-left:15px;
 
+
+// MODAL COMPONENT
+$modal-component-button: #0057b8;
+
 // PERSONAL TASK COMPONENT
 $personal-box-shadow:0 0 10px rgba(0, 0, 0, 0.3);
 $personal-border-radius:12px;
@@ -39,3 +44,37 @@ $personal-accent-color:#4caf50;
 $personal-taskInput-background: #2c2c2c;
 $personal-taskInput-input-background:#2B2B2B;
 $personal-taskInput-color: #CCCCCC;
+$personal-toolBox-radius:12px;
+
+// SUBTASK COMPONENT FOR PERSONAL TASK COMPONENT
+
+$subtask-background-blur:rgba(8, 8, 8, 0.768);
+$subtask-background-border:rgba(255, 255, 255, 0.1);
+$subtask-completed:#4e9af1;
+$subtask-clock-color:#FF3B30;
+$subtask-padding: 10px 15px;
+$subtask-notes:rgba(255, 166, 0, 0.904);
+$subtask-tags: #00a9ff;
+$subtask-textarea-background: #1e1e1e;
+$subtask-textarea-border:#333;
+$subtask-textarea-color:#eee;
+$subtask-textarea-placeholder:#777;
+$subtask-list-item-color: #f1f1f1;
+$subtask-uploadBox-border:  #555;
+$subtask-uploadBox-color:#ccc;
+$subtask-uploadBox-hover-border:#888;
+
+// WEEKSCHEDULE COMPONENT
+
+$weekschedule-card-background:#222;
+$weekschedule-margin:10px;
+
+// WORK SUBTASK COMPONENT
+
+$worksubtask-color:#aaa;
+$worksubtask-workInput:#cfcfcf;
+$worksubtask-input-background:#2b2b2b;
+$worksubtask-input:#cccccc;
+$worksubtask-listItem-color:#f1f1f1f1;
+$worksubtask-input-checkbox-size:18px;
+$worksubtask-input-hover-background: #2a2a2a

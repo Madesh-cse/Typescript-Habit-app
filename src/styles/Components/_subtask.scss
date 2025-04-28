@@ -1,254 +1,253 @@
 // SubTask
+@use '../abstract/variables' as vars;
 
-.Subtask{
-    margin-top: 8px;
-    
-    .SubTaskBox{
-        width: 500px;
-        height: 595px;
-        background-color: #1c1c1e; /* dark gray/black */
-        border-radius: 12px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        padding: 20px;
-        color: white;
-        overflow-y: scroll;
-        scrollbar-color: rgba(0, 0, 0, 0.434) transparent;
-        margin-left: 40px;
+.Subtask {
+  margin-top: 8px;
 
-        &.subtask-blur {
-            background-color: rgba(8, 8, 8, 0.768); // frosted dark glass
-            // backdrop-filter: blur(1px) saturate(20%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            // box-shadow: 0 8px 32px rgba(21, 21, 21, 0.37);
-            pointer-events: none;
-            transition: all 0.3s ease-in-out;
-          }
-          
-          &.subtask-blur * {
-            opacity: 0.55;
-            transition: opacity 0.3s ease-in-out;
-          }
+  .SubTaskBox {
+    width: 500px;
+    height: 595px;
+    background-color: vars.$personal-box-input-background;
+    border-radius: vars.$personal-toolBox-radius;
+    box-shadow: vars.$personal-box-shadow;
+    padding: 20px;
+    color: vars.$color-white;
+    overflow-y: scroll;
+    scrollbar-color: rgba(0, 0, 0, 0.434) transparent;
+    margin-left: 40px;
 
-        .SubTask_header{
-            display: flex;
-            justify-content: space-between;
-
-            .SubTask-title{
-                font-size: 12px;
-                color:#c0c0c0;
-            }
-            .Subtask-extenstion{
-                display: inline-flex;
-
-                p{
-                    margin-right: 15px;
-                    font-size: 12px;
-                    color:#c0c0c0;
-                }
-
-                .Completed-task{
-                    color:#4e9af1;
-                }
-            }
-        }
-        .Task-Heading{
-            padding: 10px 0 10px 0;
-        }
-        .Remainder{
-            margin-top: 20px;
-            display: flex;
-
-            .Remainder-clock button{
-                background-color: #2c2c2c;
-                color:#fff;
-                padding: 10px 15px;
-                border-radius: 10px;
-                outline: none;
-                border:1px solid  #2c2c2c;
-                font-size: 13px;
-
-            .Clock{
-                color:#FF3B30;
-            }
-            }
-            .Task-Type,.Task-Tags{
-                background-color: #2c2c2c;
-                color:#fff;
-                padding: 10px 15px;
-                border-radius: 10px;
-                outline: none;
-                border:1px solid  #2c2c2c;
-                margin-left: 15px;
-                font-size: 13px;
-
-                .note{
-                    color:rgba(255, 166, 0, 0.904);
-                }
-
-               .tag{
-                    color:#00A9FF;
-                }
-            }
-        }
-        .Notes{
-            margin-top: 20px;
-
-            textarea{
-                width: 100%;
-                height: 50px;
-                padding: 10px 12px;
-                border-radius: 8px;
-                background-color: #1e1e1e;
-                border: 1px solid #333;
-                color: #eee;
-                font-size: 14px;
-                resize: vertical;
-                font-family: 'Segoe UI', sans-serif;
-                margin-top: 10px;
-
-                &::placeholder {
-                    color: #777;
-                  }
-              
-                  &:focus {
-                    outline: none;
-                    border-color: #4e9af1;
-                  }
-            }
-        }
-
-        .Subtask-input {
-            position: relative;
-            margin-top: 20px;
-
-            input{
-                width:450px;
-                background-color: #2B2B2B;
-                padding: 12px 16px;;
-                color: #CCCCCC;
-                border-radius: 6px;
-                border: none;
-                border:1px solid #c0c0c0;
-                outline: none;
-
-                &:focus{
-                    border-color: #00A9FF;
-                }
-            }
-            ul{
-                margin-top: 15px;
-                list-style-type: none;
-            }
-            button{
-              position: absolute;
-              top:13px;
-              right:20px;
-              background-color: transparent;
-              border: none;
-              outline: none;
-              color:#c0c0c0;
-              font-size: 17px;
-            }
-            .List-item {
-              display: flex;
-              align-items: center;
-              gap: 0.75rem;
-              padding: 0.6rem 1rem;
-              margin-bottom: 0.5rem;
-              border-radius: 8px;
-              background-color: #1e1e1e;
-              color: #f1f1f1;
-              transition: background-color 0.2s ease;
-            
-              input[type='checkbox'] {
-                width: 18px;
-                height: 18px;
-                cursor: pointer;
-                accent-color: #4caf50; // green when checked (modern browsers)
-              }
-            
-              li {
-                list-style: none;
-                font-size: 0.95rem;
-                flex: 1;
-                transition: text-decoration 0.2s ease, opacity 0.2s ease;
-              }
-            
-              input[type='checkbox']:checked + li {
-                text-decoration: line-through;
-                opacity: 0.6;
-              }
-            
-              &:hover {
-                border:1px solid #4e9af1;
-              }
-            }
-        }
-        .progress-container {
-          width:100%;
-          // display: flex ;
-          align-items: center;
-          gap: 0.5rem;
-          margin: 15px 0;
-        
-          progress {
-            width: 100%;
-            height: 8px;
-            border-radius: 5px;
-            -webkit-appearance: none;
-            appearance: none;
-          }
-        
-          progress::-webkit-progress-bar {
-            background-color: #eee;
-            border-radius: 5px;
-          }
-        
-          progress::-webkit-progress-value {
-            background-color: #4caf50;
-            border-radius: 5px;
-          }
-        }
-        .Attachment {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-          }
-          
-          .Upload-box {
-            border: 2px dashed #555;
-            padding: 15px 20px;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 10px;
-            background-color: #1e1e1e;
-            color: #ccc;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.3s ease;
-            position: relative;
-          }
-          
-          .Upload-box:hover {
-            border-color: #888;
-          }
-          
-          .Upload-input {
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-          }
-          
-          .Upload-label {
-            z-index: 1;
-            position: relative;
-            pointer-events: none;
-            font-size: 14px;
-        }
-          
+    &.subtask-blur {
+      background-color: vars.$subtask-background-blur;
+      border: 1px solid vars.$subtask-background-border;
+      pointer-events: none;
+      transition: all 0.3s ease-in-out;
     }
+
+    &.subtask-blur * {
+      opacity: 0.55;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .SubTask_header {
+      display: flex;
+      justify-content: space-between;
+
+      .SubTask-title {
+        font-size: 12px;
+        color: vars.$color-white;
+      }
+      .Subtask-extenstion {
+        display: inline-flex;
+
+        p {
+          margin-right: 15px;
+          font-size: 12px;
+          color: vars.$color-silver;
+        }
+
+        .Completed-task {
+          color: vars.$subtask-completed;
+        }
+      }
+    }
+    .Task-Heading {
+      padding: 10px 0 10px 0;
+    }
+    .Remainder {
+      margin-top: 20px;
+      display: flex;
+
+      .Remainder-clock button {
+        background-color: vars.$personal-taskInput-background;
+        color: vars.$color-white;
+        padding: vars.$subtask-padding;
+        border-radius: 10px;
+        outline: none;
+        border: 1px solid vars.$personal-taskInput-background;
+        font-size: 13px;
+
+        .Clock {
+          color: vars.$subtask-clock-color;
+        }
+      }
+      .Task-Type,
+      .Task-Tags {
+        background-color: vars.$personal-taskInput-background;
+        color: vars.$color-white;
+        padding: vars.$subtask-padding;
+        border-radius: 10px;
+        outline: none;
+        border: 1px solid vars.$personal-taskInput-background;
+        margin-left: 15px;
+        font-size: 13px;
+
+        .note {
+          color: vars.$subtask-notes;
+        }
+
+        .tag {
+          color:vars.$subtask-tags;
+        }
+      }
+    }
+    .Notes {
+      margin-top: vars.$margin-top;
+
+      textarea {
+        width: 100%;
+        height: 50px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background-color:vars.$subtask-textarea-background;
+        border: 1px solid vars.$subtask-textarea-border;
+        color: vars.$subtask-textarea-color;
+        font-size: 14px;
+        resize: vertical;
+        font-family: "Segoe UI", sans-serif;
+        margin-top: 10px;
+
+        &::placeholder {
+          color: vars.$subtask-textarea-placeholder;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: vars.$subtask-completed;
+        }
+      }
+    }
+
+    .Subtask-input {
+      position: vars.$postion-relative;
+      margin-top: vars.$margin-top;
+
+      input {
+        width: 450px;
+        background-color: #2b2b2b;
+        padding: 12px 16px;
+        color: vars.$personal-taskInput-color;
+        border-radius: 6px;
+        border: none;
+        border: 1px solid vars.$color-silver;
+        outline: none;
+
+        &:focus {
+          border-color: vars.$subtask-tags;
+        }
+      }
+      ul {
+        margin-top: 15px;
+        list-style-type: none;
+      }
+      button {
+        position: absolute;
+        top: 13px;
+        right: 20px;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: vars.$color-silver;
+        font-size: 17px;
+      }
+      .List-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        background-color: vars.$subtask-textarea-background;
+        color:vars.$subtask-list-item-color;
+        transition: background-color 0.2s ease;
+
+        input[type="checkbox"] {
+          width: 18px;
+          height: 18px;
+          cursor: pointer;
+          accent-color: vars.$personal-accent-color;
+        }
+
+        li {
+          list-style: none;
+          font-size: 0.95rem;
+          flex: 1;
+          transition: text-decoration 0.2s ease, opacity 0.2s ease;
+        }
+
+        input[type="checkbox"]:checked + li {
+          text-decoration: line-through;
+          opacity: 0.6;
+        }
+
+        &:hover {
+          border: 1px solid vars.$subtask-completed;
+        }
+      }
+    }
+    .progress-container {
+      width: 100%;
+      // display: flex ;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 15px 0;
+
+      progress {
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      progress::-webkit-progress-bar {
+        background-color:vars.$subtask-textarea-color;
+        border-radius: 5px;
+      }
+
+      progress::-webkit-progress-value {
+        background-color: vars.$personal-accent-color;
+        border-radius: 5px;
+      }
+    }
+    .Attachment {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .Upload-box {
+      border: 2px dashed vars.$subtask-uploadBox-border;
+      padding: 15px 20px;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 10px;
+      background-color: vars.$subtask-textarea-background;
+      color: vars.$subtask-uploadBox-color;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+      position: vars.$postion-relative;
+    }
+
+    .Upload-box:hover {
+      border-color: vars.$subtask-uploadBox-hover-border;
+    }
+
+    .Upload-input {
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      position: vars.$postion-absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+    }
+
+    .Upload-label {
+      z-index: 1;
+      position: vars.$postion-relative;
+      pointer-events: none;
+      font-size: 14px;
+    }
+  }
 }

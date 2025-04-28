@@ -1,3 +1,5 @@
+@use '../abstract/variables' as vars;
+
 .Weekschedule-flex{
     display: flex;
 }
@@ -15,60 +17,60 @@
 
     .TaskCard{
         width:300px;
-        background-color: #222;
+        background-color:vars.$weekschedule-card-background;
         border-radius: 8px;
         padding: 10px;
-        margin-bottom: 10px;
-        color: white;
+        margin-bottom: vars.$weekschedule-margin;
+        color: vars.$color-white;
 
         .Task-Input{
-            position: relative;
+            position: vars.$postion-relative;
             padding-top: 30px;
             input{
                 width:250px;
-                background-color: #2B2B2B;
+                background-color:vars.$personal-taskInput-input-background;
                 padding: 12px 16px;;
-                color: #CCCCCC;
+                color: vars.$personal-taskInput-color;
                 border-radius: 6px;
                 border: none;
-                border:1px solid #c0c0c0;
+                border:1px solid vars.$color-silver;
                 outline: none;
     
                 &::placeholder{
-                    color: #888;
+                    color:vars.$subtask-uploadBox-hover-border;
                 }
             }
             button{
-                position: absolute;
+                position: vars.$postion-absolute;
                 top:45px;
                 right:50px;
                 background-color: transparent;
                 border: none;
                 outline: none;
-                color:#c0c0c0;
+                color:vars.$color-silver;
                 font-size: 17px;
             }
         }
 
         .TaskList{
             list-style-type: none;
-            margin-top: 10px;
+            margin-top: vars.$weekschedule-margin;
 
             .Schedule-flex{
                 display: flex;
                 padding: 13px 15px;
-                background-color: #2B2B2B;
-                color:#fff;
+                background-color:vars.$personal-taskInput-input-background;
+                color:vars.$color-white;
                 border-radius: 10px;
-                margin-top: 10px;
+                margin-top: vars.$weekschedule-margin;
 
                 .Personal-list{
-                    margin-left: 10px;
+                    margin-left: vars.$weekschedule-margin;
 
                     .Task-type{
                         font-size: 12px;
-                        color:#c0c0c0;
-                        margin-bottom: 10px;
+                        color:vars.$color-silver;
+                        margin-bottom:vars.$weekschedule-margin;
                     }
 
                     ul{
@@ -85,7 +87,7 @@
                 }
 
                 li{
-                    margin-top: 10px;
+                    margin-top:vars.$weekschedule-margin;
                 }
             }
         }

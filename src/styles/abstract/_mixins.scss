@@ -4,3 +4,19 @@
     display: flex;
     justify-content: space-around;
 }
+
+// MEDIA QUERY BREAKPOINT
+
+$breakpoints: (
+"xs": 0,
+"sm": 480px,
+"md": 720px,
+"lg": 960px, 
+"x1": 1200px,
+) ;
+
+@mixin respond-between($min, $max) {
+    @media (min-width: map-get($breakpoints, $min)) and (max-width: map-get($breakpoints, $max)) {
+      @content;
+    }
+}
