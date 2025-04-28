@@ -1,3 +1,4 @@
+@use '../abstract/variables' as vars;
 .ModalBox{
   margin: auto;
   width:500px;
@@ -6,20 +7,20 @@
   outline: none;
   border-radius: 8px;
   padding: 2rem;
-  background-color: #fff;
+  background-color: vars.$color-white;
   overflow: hidden;
-  position: relative;
+  position: vars.$postion-relative;
 
    p{
-    position: absolute;
+    position: vars.$postion-absolute;
     top:20px;
     right:20px;
-    font-family: sans-serif;
+    font-family: vars.$font-san;
     cursor: pointer;
   }
 
   h1{
-    font-family: sans-serif;
+    font-family: vars.$font-san;
   }
 
   .InputBox{
@@ -31,14 +32,14 @@
   }
 
   button{
-    position: absolute;
+    position: vars.$postion-absolute;
     bottom: 15px;
     right:20px;
     padding: 8px 20px;
-    background-color:  #0057b8;
+    background-color:vars.$modal-component-button;
     outline:none;
-    border:1px solid #0057b8;
-    color:#fff;
+    border:1px solid vars.$modal-component-button;
+    color:vars.$color-white;
     border-radius: 20px;
     cursor: pointer;
 

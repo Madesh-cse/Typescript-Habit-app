@@ -6,7 +6,6 @@
         complete:boolean,
         worksubtasks?:string[]
     }
-
     interface WorkSubmission {
         //work Context
 
@@ -164,10 +163,6 @@
               };
             });
           };
-          
-
-
-
         return(
             <WorkContext.Provider value={{
                 WorkTasks,
