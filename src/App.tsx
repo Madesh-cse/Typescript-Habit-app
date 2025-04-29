@@ -7,6 +7,7 @@ import { SubmissionProvider } from './Context/InputSubmissonContext';
 import { WorkTaskProvider } from './Context/WorkInputSubmissionContext';
 import Work from './pages/Work/Work';
 import WeekSchedules from './pages/WeekSchedules/WeekSchedules';
+import AllMyTask from './pages/AllMyTask/AllMyTask';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path='Personal' element={<Personal/>}></Route>
             <Route path='Work' element={<Work/>}></Route>
             <Route path='weekschedule' element={<WeekSchedules/>}></Route>
+            <Route path='AllTask' element={<AllMyTask/>}></Route>
           </Routes>
         </WorkTaskProvider>
       </SubmissionProvider>
