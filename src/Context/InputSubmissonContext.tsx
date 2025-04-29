@@ -6,6 +6,7 @@ interface Task{
   text:string,
   completed:boolean,
   subtasks?: string[]
+  duedate: Date;
 }
 
 
@@ -60,7 +61,7 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
     //Personal Task
     // The submitted value is append to an array 
     const addSubmisson = (day: string,text:string)=>{
-        const newTask: Task = { id:uuidv4(), text, completed: false };
+        const newTask: Task = { id:uuidv4(), text, completed: false,duedate:new Date() };
         setSubmittedValue(prev => ({
           // The prev task hold the task in an object
           ...prev,

@@ -116,7 +116,6 @@ function Sidebar() {
                         {!isopen ? <Mylist listContent = {SubmittedValue} WorkCount = {WorkCount}/>:''}
                     </div>
                 </div>
-                {isToogle && ( <hr />)} 
                 {isToogle && (
                     <div className='Shared-Space'>
                         <div className='share-container'>

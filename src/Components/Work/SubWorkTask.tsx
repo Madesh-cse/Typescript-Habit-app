@@ -1,4 +1,4 @@
-import '../../styles/Components/WorkList.scss'
+import '../../styles/Components/_workList.scss'
 import ReminderModal from '../Modal/DateModel';
 import { useState } from 'react';
 import { IoLockClosedOutline } from 'react-icons/io5';
