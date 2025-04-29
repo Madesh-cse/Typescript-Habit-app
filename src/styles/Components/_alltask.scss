@@ -1,0 +1,108 @@
+@use "../abstract/variables" as vars;
+
+.AllTask-Container {
+  display: flex;
+}
+.AllTask {
+  width: 100%;
+  margin-left: 280px;
+
+  .AllTaskFlex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .AllTaskBox {
+    width: 500px;
+    height: 530px;
+    background-color: vars.$personal-box-input-background; /* dark gray/black */
+    border-top-left-radius: vars.$personal-border-radius;
+    border-top-right-radius: vars.$personal-border-radius;
+    box-shadow: vars.$personal-box-shadow;
+    padding: 20px;
+    color: vars.$color-white;
+    overflow-y: auto;
+
+    .task-section {
+      .task-subsection {
+        margin-top: 30px;
+        h2 {
+          font-size: 15px;
+        }
+      }
+      .task-subflex {
+        display: flex;
+        margin-top: 15px;
+
+        li {
+          list-style-type: none;
+        }
+
+        input[type="checkbox"] {
+          appearance: none;
+          -webkit-appearance: none;
+          width: 18px;
+          height: 18px;
+          border: 1px solid vars.$color-silver;
+          border-radius: 4px;
+          background-color: vars.$personal-box-input-background;
+          cursor: pointer;
+          position: relative;
+          transform: scale(1.2);
+          margin-right: 20px;
+
+          &:checked {
+            background-color: vars.$personal-accent-color;
+            border-color: vars.$personal-box-input-background;
+
+            &::after {
+              content: "";
+              position: vars.$postion-absolute;
+              top: 2px;
+              left: 5px;
+              width: 4px;
+              height: 8px;
+              border: solid vars.$color-white;
+              border-width: 0 2px 2px 0;
+              transform: rotate(45deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .AllTaskInput {
+    width: 500px;
+    padding: 15px 15px;
+    background-color: vars.$personal-taskInput-background;
+    color: #cfcfcf;
+    position: relative;
+    border-bottom-left-radius: vars.$personal-border-radius;
+    border-bottom-right-radius: vars.$personal-border-radius;
+
+    input {
+      width: 450px;
+      background-color: vars.$personal-taskInput-input-background;
+      padding: 12px 16px;
+      color: vars.$personal-taskInput-color;
+      border-radius: 6px;
+      border: none;
+      border: 1px solid vars.$color-silver;
+      outline: none;
+
+      &::placeholder {
+        color: #888;
+      }
+    }
+    button {
+      position: vars.$postion-absolute;
+      top: 30px;
+      right: 50px;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color: vars.$color-silver;
+      font-size: 17px;
+    }
+  }
+}
