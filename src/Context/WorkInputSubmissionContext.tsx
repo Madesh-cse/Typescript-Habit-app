@@ -2,9 +2,11 @@
     import { v4 as uuidv4 } from 'uuid';
     interface WorkTask {
         id:string,
-        Work : string,
-        complete:boolean,
+        text : string,
+        completed:boolean,
         worksubtasks?:string[]
+        duedate:string;
+        taskType:'Work'
     }
     interface WorkSubmission {
         //work Context
@@ -54,9 +56,9 @@
 
 
         // Work Task
-        const addWorkSubmission = (day:string,Work:string)=>{
+        const addWorkSubmission = (day:string,text:string)=>{
 
-            const newTaskWork:WorkTask = { id:uuidv4(),  Work,complete:false}
+            const newTaskWork:WorkTask = { id:uuidv4(),  text,completed:false,duedate:new Date().toISOString(),taskType:'Work'}
             // The prev task hold the task in an object
             setWorkTasks(prev=>({
             // [day:string , Task [text,complete]]
@@ -73,7 +75,7 @@
                 // The prev task hold the task in an object
             ...prev,
             [day]:prev[day].map((task,i)=>
-                i === index ? {...task,complete:!task.complete}:task // unchanged task
+                i === index ? {...task,complete:!task.completed}:task // unchanged task
             )
             }))
         }

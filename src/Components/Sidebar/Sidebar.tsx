@@ -96,6 +96,7 @@ function Sidebar() {
                                 <NavLink to='/AllTask'>
                                     <span className='icon'><FaTasks/>    </span>
                                     <span>All my task</span>
+                                    <span className='count'>{Total}</span>
                                 </NavLink>
                             </li>
                             <li>

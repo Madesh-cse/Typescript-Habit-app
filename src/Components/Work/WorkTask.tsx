@@ -36,14 +36,14 @@ function WorkTask() {
                     <div className="sub-flex"> 
                       <input
                         type="checkbox"
-                        checked={task.complete}
+                        checked={task.completed}
                         onChange={() => toggleWorkCompleted(todayWork, index)}
                       />
-                      <li className={task.complete ? "completed" : ""}>
-                        {task.Work}
+                      <li className={task.completed ? "completed" : ""}>
+                        {task.text}
                       </li>
                     </div>
-                    {task.complete && (
+                    {task.completed && (
                       <button type="submit" onClick={()=>WorkRemoveTaskList(todayWork,index)}> X</button>
                     )}
                   </div>

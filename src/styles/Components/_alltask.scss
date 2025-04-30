@@ -29,41 +29,48 @@
           font-size: 15px;
         }
       }
-      .task-subflex {
-        display: flex;
-        margin-top: 15px;
+      .Select-Task {
+        width: 450px;
+        background-color: #2c2c2c;
+        color: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        .task-subflex {
+          display: flex;
+          li {
+            list-style-type: none;
+          }
 
-        li {
-          list-style-type: none;
-        }
+          input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid vars.$color-silver;
+            border-radius: 4px;
+            background-color: vars.$personal-box-input-background;
+            cursor: pointer;
+            position: relative;
+            transform: scale(1.2);
+            margin-right: 20px;
 
-        input[type="checkbox"] {
-          appearance: none;
-          -webkit-appearance: none;
-          width: 18px;
-          height: 18px;
-          border: 1px solid vars.$color-silver;
-          border-radius: 4px;
-          background-color: vars.$personal-box-input-background;
-          cursor: pointer;
-          position: relative;
-          transform: scale(1.2);
-          margin-right: 20px;
+            &:checked {
+              background-color: vars.$personal-accent-color;
+              border-color: vars.$personal-box-input-background;
 
-          &:checked {
-            background-color: vars.$personal-accent-color;
-            border-color: vars.$personal-box-input-background;
-
-            &::after {
-              content: "";
-              position: vars.$postion-absolute;
-              top: 2px;
-              left: 5px;
-              width: 4px;
-              height: 8px;
-              border: solid vars.$color-white;
-              border-width: 0 2px 2px 0;
-              transform: rotate(45deg);
+              &::after {
+                content: "";
+                position: vars.$postion-absolute;
+                top: 2px;
+                left: 5px;
+                width: 4px;
+                height: 8px;
+                border: solid vars.$color-white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+              }
             }
           }
         }

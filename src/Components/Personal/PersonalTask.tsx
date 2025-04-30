@@ -76,7 +76,6 @@ function PersonalTask() {
             </form>
           </div>
         </div>
-
         {/* Show SubTask modal if a task is selected */}
       {SelectedTask && <SubTask  />}
       </div>

@@ -73,10 +73,10 @@ function TaskCardGrid() {
             {/* Work Tasks */}
             {(WorkTasks[day] || []).map((task, index) => (
               <div className="Schedule-flex" key={`work-${index}`}>
-                <li className={task.complete ? "completed" : ""}>
+                <li className={task.completed ? "completed" : ""}>
                   <input
                     type="checkbox"
-                    checked={task.complete}
+                    checked={task.completed}
                     onChange={() => toggleWorkCompleted(day, index)}
                   />
                 </li>
@@ -84,7 +84,7 @@ function TaskCardGrid() {
                   <p className="Task-type">
                     <span><IoLockClosedOutline /></span> My list &gt; Work
                   </p>
-                  <p>{task.Work}</p>
+                  <p>{task.text}</p>
                   {task.worksubtasks && task.worksubtasks.length > 0 && (
                     <ul className="Subtask-List-inline">
                       {task.worksubtasks.map((sub, subIndex) => (
