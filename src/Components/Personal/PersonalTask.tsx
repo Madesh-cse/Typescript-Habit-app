@@ -9,13 +9,16 @@ function PersonalTask() {
   const { submittedValue,addSubmisson,toggleCompleted,selectTask,SelectedTask,RemoveTaskList} = useInputContext();
   const [input, setInput] = useState("");
 
-  const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const todayDate = new Date();
+  const today = days[todayDate.getDay()];
   const todayTasks = submittedValue[today] || [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim()) {
-      addSubmisson(today, input.trim());
+      const todayDateStr = new Date().toISOString();
+      addSubmisson(today, input.trim(),todayDateStr );
       setInput("");
     }
   };
