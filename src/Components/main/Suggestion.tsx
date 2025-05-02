@@ -65,15 +65,15 @@ function Suggestion() {
              {/* Work list */}
 
            {Object.entries(WorkTasks).map(([day, work]) =>
-              work.filter((work)=>work.Work.toLocaleLowerCase().includes(lowerFilter)).map((works, index) => (
+              work.filter((work)=>work.text.toLocaleLowerCase().includes(lowerFilter)).map((works, index) => (
                 <div className="Suggestion-box" key={`work-${day}-${index}`}>
                   <div className="addition-feature">
                     <p><FaPlus /></p>
                   </div>
                   <div className="list-name">
                     <p><span><IoLockClosedOutline /></span> Work list - {day}</p>
-                    <li className={works.complete ? 'completed' : ''}>
-                      {works.Work}
+                    <li className={works.completed ? 'completed' : ''}>
+                      {works.text}
                     </li>
                   </div>
                 </div>

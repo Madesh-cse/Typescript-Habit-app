@@ -6,27 +6,35 @@ import SubTask from "../Personal/SubTask";
 import SubWorkTask from "../Work/SubWorkTask";
 
 function AllTask() {
-  const {submittedValue,selectTask,SelectedTask,addSubmisson,} = useInputContext();
-  const { WorkTasks,WorkSelectTask,WorkSelectedTask,} = useWorkContext();
+  const { submittedValue, selectTask, SelectedTask, addSubmisson,toggleCompleted } =
+  useInputContext();
+
+  const { WorkTasks, WorkSelectTask, WorkSelectedTask,toggleWorkCompleted } = useWorkContext();
 
   const today = new Date();
   const tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
 
-  const NormalizeDate = (date: Date) => {
-    const normalized = new Date(date);
-    normalized.setHours(0, 0, 0, 0);
-    return normalized;
+  const normalizeDate = (date: Date) => {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d;
   };
 
-  const todayNormalized = NormalizeDate(today);
-  const tomorrowNormalized = NormalizeDate(tomorrow);
+  const todayNormalized = normalizeDate(today);
+  const tomorrowNormalized = normalizeDate(tomorrow);
 
   const categorizeTask = (taskDate: Date) => {
-    const normalizedTask = NormalizeDate(taskDate);
-    if (normalizedTask.getTime() === todayNormalized.getTime()) return "today";
-    if (normalizedTask.getTime() === tomorrowNormalized.getTime()) return "tomorrow";
-    if (normalizedTask.getTime() > todayNormalized.getTime()) return "upcoming";
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const normalizedTaskDate = normalizeDate(taskDate);
+
+    if (normalizedTaskDate.getTime() === todayNormalized.getTime())
+      return "today";
+    if (normalizedTaskDate.getTime() === tomorrowNormalized.getTime())
+      return "tomorrow";
+    if (normalizedTaskDate > todayNormalized) return "upcoming";
     return "someday";
   };
 
@@ -34,38 +42,60 @@ function AllTask() {
   const allWorkTasks = Object.values(WorkTasks).flat();
   const allTasks = [...allPersonalTasks, ...allWorkTasks];
 
-  const todayTask = allTasks.filter(task => categorizeTask(new Date(task.duedate)) === "today");
-  const tomorrowTask = allTasks.filter(task => categorizeTask(new Date(task.duedate)) === "tomorrow");
-  const upcomingTask = allTasks.filter(task => categorizeTask(new Date(task.duedate)) === "upcoming");
-  const somedayTask = allTasks.filter(task => categorizeTask(new Date(task.duedate)) === "someday");
-
-
-  const todayTasks = allTasks.filter((task) =>
-    categorizeTask(new Date(task.duedate || task.duedate)) === "today"
-  );
+  const taskSections = {
+    Today: allTasks.filter(
+      (task) => categorizeTask(new Date(task.duedate)) === "today"
+    ),
+    Tomorrow: allTasks.filter(
+      (task) => categorizeTask(new Date(task.duedate)) === "tomorrow"
+    ),
+    Upcoming: allTasks.filter(
+      (task) => categorizeTask(new Date(task.duedate)) === "upcoming"
+    ),
+    Someday: allTasks.filter(
+      (task) => categorizeTask(new Date(task.duedate)) === "someday"
+    ),
+  };
 
   const handleTaskSelect = (task: any) => {
     if (task.taskType === "personal") {
       selectTask(task);
+      WorkSelectTask(null)
     } else if (task.taskType === "Work") {
       WorkSelectTask(task);
+      selectTask(null)
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const input = (e.target as HTMLFormElement).elements.namedItem("taskInput") as HTMLInputElement;
+    const input = (e.target as HTMLFormElement).elements.namedItem(
+      "taskInput"
+    ) as HTMLInputElement;
     const value = input.value.trim();
     if (!value) return;
 
     const todayStr = todayNormalized.toISOString();
-
-    // Add based on your app’s current task mode
-    addSubmisson(todayStr, value); // for personal
-    // or addWorkSubmission(todayStr, value); // for work
-
+    addSubmisson(todayStr, value, todayStr);
     input.value = "";
   };
+
+  const handleToggleCompleted = (task: any) => {
+    const dueDate = normalizeDate(new Date(task.duedate)).toISOString();
+  
+    if (task.taskType === "personal") {
+      const index = submittedValue[dueDate]?.findIndex(t => t.id === task.id);
+      if (index !== -1 && index !== undefined) {
+        toggleCompleted(dueDate, index);
+      }
+    } else if (task.taskType === "Work") {
+      const index = WorkTasks[dueDate]?.findIndex(t => t.id === task.id);
+      if (index !== -1 && index !== undefined) {
+        toggleWorkCompleted(dueDate, index);
+      }
+    }
+  };
+  
 
   return (
     <div className="AllTask">
@@ -73,37 +103,49 @@ function AllTask() {
       <div className="AllTaskFlex">
         <div className="AllTaskContainer-1">
           <div className="AllTaskBox">
-            <section className="task-section">
-                
-              <h2>Today</h2>
-              <ul>
-                {todayTasks.map((task) => (
-                  <div className="Select-Task" key={task.id} onClick={() => handleTaskSelect(task)}>
-                    <div className="task-subflex">
-                      <input type="checkbox" checked={task.completed || task.completed} readOnly />
-                      {/* personal || work */}
-                      <li>{task.text || task.text}</li>
-                    </div>
-                  </div>
-                ))}
-              </ul>
-            </section>
+            {Object.entries(taskSections).map(([section, tasks]) => (
+              <section className="task-section" key={section}>
+                <h2>{section}</h2>
+                {tasks.length > 0 ? (
+                  <ul>
+                    {tasks.map((task) => (
+                      <div
+                        className="Select-Task"
+                        key={task.id}
+                        onClick={() => handleTaskSelect(task)}
+                      >
+                        <div className="task-subflex">
+                          <input
+                            type="checkbox"
+                            checked={task.completed === true} 
+                            onChange={()=>handleToggleCompleted(task)}
+                          />
+                          <li>{task.text}</li>
+                        </div>
+                      </div>
+                    ))}
+                  </ul>
+                ) : (
+                  ""
+                )}
+              </section>
+            ))}
           </div>
 
           <div className="AllTaskInput">
             <form onSubmit={handleSubmit}>
-              <input type="text" name="taskInput" />
+              <input type="text" name="taskInput" placeholder="Add task..." />
               <button type="submit">
                 <FaArrowUp />
               </button>
             </form>
           </div>
         </div>
-
-        {/* Conditional SubTask or WorkSubTask */}
         <div className="AllTaskContainer-2">
-          {SelectedTask?.taskType === "personal" && <SubTask />}
-          {WorkSelectedTask?.taskType === "Work" && <SubWorkTask  />}
+          <div className="fade-transition"> 
+            {SelectedTask && SelectedTask.taskType === 'personal' && <SubTask/>}
+            {WorkSelectedTask && WorkSelectedTask.taskType === 'Work' && <SubWorkTask/>}
+          </div>
         </div>
       </div>
     </div>

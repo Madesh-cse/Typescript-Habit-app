@@ -15,13 +15,13 @@ interface Task{
 interface InputSubmissonType {
   //[monday]:text of task
     submittedValue:{ [day: string]: Task[] },
-    addSubmisson:(day: string,value:string)=>void
+    addSubmisson:(day: string,value:string,duedate:string)=>void
     toggleCompleted: (day: string,index: number) => void;
 
     // SelectedTask : interface Task
     SelectedTask : Task | null;
     // method
-    selectTask : (task:Task)=>void;
+    selectTask : (task:Task | null)=>void;
 
     SubTask : (day:string,taskIndex:number,subtask:string)=>void;
     ToggleSubTask : (day:string,taskIndex:number,subIndex:number)=>void
@@ -61,8 +61,14 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
 
     //Personal Task
     // The submitted value is append to an array 
-    const addSubmisson = (day: string,text:string)=>{
-        const newTask: Task = { id:uuidv4(), text, completed: false,duedate:new Date().toISOString(), taskType:'personal' };
+    const addSubmisson = (day: string,text:string,duedate?: string)=>{
+
+      const due = duedate ? new Date(duedate) : (()=>{
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        return today
+      })();
+        const newTask: Task = { id:uuidv4(), text, completed: false,duedate:due.toISOString(), taskType:'personal' };
         setSubmittedValue(prev => ({
           // The prev task hold the task in an object
           ...prev,
@@ -81,7 +87,7 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
         ),
       }));
     };
-    const selectTask = (task:Task) =>{
+    const selectTask = (task:Task | null) =>{
      setSelectedTask(task)
     }
 
