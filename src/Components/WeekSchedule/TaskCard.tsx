@@ -32,7 +32,14 @@ function TaskCardGrid() {
    // Looks up the task for the specified day from the inputs state.
     const task = inputs[day]?.trim();
     if (task) {
-      addSubmisson(day, task);
+      const today =  new Date()
+      const todayIndex = today.getDay()
+      const dayIndex = days.indexOf(day)
+      const diffday = (dayIndex - todayIndex+7) % 7
+      const duedate = new Date(today)
+      duedate.setDate(today.getDate()+diffday)
+      duedate.setHours(0,0,0,0)
+      addSubmisson(day,task,duedate.toISOString());
       // spread the inputs value without changes
       setInputs(prev => ({ ...prev, [day]: '' }));
     }

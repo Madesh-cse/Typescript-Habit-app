@@ -125,7 +125,7 @@ function SubWorkTask() {
             ))}
           </ul>
         </div>
-        <Attachement/>
+        {currentTask?.id &&  <Attachement taskId={currentTask.id}/> }
       </div>
     </div>
   );

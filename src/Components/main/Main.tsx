@@ -6,7 +6,7 @@ import DisplayContent from './DisplayContent';
 
 function Main() {
 
-    const{ addSubmisson} = useInputContext()
+    const{ addSubmisson,submittedValue} = useInputContext()
 
     const[gretting,setgretting] = useState<string>("")
     const[inputText,setinputText] = useState<string>('')
@@ -43,11 +43,15 @@ function Main() {
         year: 'numeric',
     }).format(new Date());
 
+    const todayDate = new Date()
+    const todayKeyStore = todayDate.toISOString().split('T')[0]
+    const todayTask = submittedValue[todayKeyStore] || []
+
     const handleSubmit = (e:React.FormEvent)=>{
         e.preventDefault()
 
         if(inputText.trim()!==""){
-            addSubmisson(inputText)
+            addSubmisson( todayKeyStore,inputText)
             setinputText('')
         }
     }
