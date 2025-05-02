@@ -1,4 +1,5 @@
 @use "../abstract/variables" as vars;
+@use "../abstract/mixins" as *;
 
 .display-box {
     width:100%;
@@ -19,6 +20,10 @@
         color:#fff;
         display: flex;
         font-family: sans-serif;
+
+        @include respond-between('xs','sm'){
+            width:330px;
+        }
 
         .radio-input{
             input[type="checkbox"] {

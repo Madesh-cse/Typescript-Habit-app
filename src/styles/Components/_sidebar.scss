@@ -1,4 +1,5 @@
 @use "../abstract/variables" as vars;
+@use "../abstract/mixins" as *;
 
 .Home-flex {
   width: 100%;
@@ -13,7 +14,7 @@
 }
 .sidebar {
   width: 250px;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top:0;
   left:0;
@@ -25,12 +26,20 @@
   padding: 20px 0 0 25px;
   transition: all 0.3s ease-in-out;
 
+  @include respond-between('xs','sm'){
+    padding: 20px 0 0 0 ;
+  }
+
   .sidebar.closed ~ * {
     grid-template-columns: 100px 1fr 350px;
   }
 
   &.closed {
     width: 100px;
+
+    @include respond-between("xs","sm"){
+      width:40px;
+    }
 
     .sidebar-list ul li a {
       justify-content: center;
@@ -70,6 +79,12 @@
       color: vars.$Title-color;
       border-radius: vars.$border-circle;
       padding: 8px 8px 3px 8px;
+
+      @include respond-between("xs", "sm") {
+        font-size: 14px;
+        padding:3px 4px;
+        margin-left: 0;
+      }
     }
     .user_name {
       color: vars.$Title-color;
@@ -137,6 +152,16 @@
         font-family: sans-serif;
         font-size: 17px;
         width: 100%;
+
+        .icon {
+          font-size: 20px;
+
+          @include respond-between("xs", "sm") {
+            font-size: 16px;
+            margin-right: 5px;
+            margin-left: 0;    // align left more tightly
+          }
+        }
   
         span {
           margin-right: 15px;

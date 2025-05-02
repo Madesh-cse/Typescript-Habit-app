@@ -1,15 +1,27 @@
 @use "../abstract/variables" as vars;
+@use "../abstract/mixins" as *;
 
 .Work-Container {
   display: flex;
 }
 
 .WorkTaskContainer {
-  width: 100%;
+  max-width: 100%;
   margin-left: 270px;
+  overflow-x: hidden;
+
+  @include respond-between('xs','sm'){
+    margin-left: 50px;
+  }
 
   .WorkFlex {
     display: flex;
+    flex-direction: row;
+
+    @include respond-between('xs','sm'){
+     flex-direction: column;
+    }
+
   }
 
   .WorkBox {
@@ -22,6 +34,11 @@
     padding: 20px;
     color: vars.$color-white;
     overflow-y: auto;
+
+    @include respond-between('xs','sm'){
+      width:325px;
+      margin-left: 5px;
+    }
 
     &.subtask-blur {
       background-color: vars.$subtask-background-blur;
@@ -47,16 +64,16 @@
         background-color: vars.$color-silver;
         color: #000;
         border: 1px solid vars.$color-silver;
-        width: 25px;        
-        height: 25px;      
-        padding: 0;         
-        border-radius: vars.$border-circle; 
-        font-size: 14px;    
-        display: flex;      
+        width: 25px;
+        height: 25px;
+        padding: 0;
+        border-radius: vars.$border-circle;
+        font-size: 14px;
+        display: flex;
         align-items: center;
         justify-content: center;
-        cursor: pointer;  
-    }
+        cursor: pointer;
+      }
     }
 
     .TaskBox-flex {
@@ -66,6 +83,10 @@
       padding: 15px;
       border-radius: 10px;
       margin-bottom: 20px;
+
+      @include respond-between('xs','sm'){
+        width:300px;
+      }
     }
 
     .Subtask-List-inline {
@@ -79,14 +100,37 @@
     }
 
     input[type="checkbox"] {
-      accent-color: vars.$personal-accent-color;
-      transform: scale(1.2);
-      margin-right: vars.$margin-top;
+      appearance: none;
+      -webkit-appearance: none;
       width: 18px;
       height: 18px;
+      border: 1px solid vars.$color-silver;
+      border-radius: 4px;
+      background-color: vars.$personal-box-input-background;
+      cursor: pointer;
+      position: relative;
+      transform: scale(1.2);
+      margin-right: 20px;
+
+      &:checked {
+        background-color: vars.$personal-accent-color;
+        border-color: vars.$personal-box-input-background;
+
+        &::after {
+          content: "";
+          position: vars.$postion-absolute;
+          top: 2px;
+          left: 5px;
+          width: 4px;
+          height: 8px;
+          border: solid vars.$color-white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+      }
     }
     .completed {
-      text-decoration: underline;
+      text-decoration: overline;
       color: vars.$worksubtask-color;
     }
   }
@@ -95,10 +139,13 @@
     width: 500px;
     padding: 15px 15px;
     background-color: vars.$personal-taskInput-background;
-    color:vars.$worksubtask-workInput;
+    color: vars.$worksubtask-workInput;
     position: vars.$postion-relative;
     border-bottom-left-radius: vars.$personal-toolBox-radius;
-    border-bottom-right-radius:vars.$personal-toolBox-radius;
+    border-bottom-right-radius: vars.$personal-toolBox-radius;
+    @include respond-between('xs','sm'){
+      width:330px;
+    }
 
     input {
       width: 450px;
@@ -109,6 +156,10 @@
       border: none;
       border: 1px solid vars.$color-silver;
       outline: none;
+      @include respond-between('xs','sm'){
+        width:300px;
+        margin-left: 3px;
+      }
 
       &::placeholder {
         color: vars.$subtask-uploadBox-hover-border;
@@ -138,12 +189,12 @@
       }
 
       progress::-webkit-progress-bar {
-        background-color:vars.$subtask-textarea-color;
+        background-color: vars.$subtask-textarea-color;
         border-radius: 5px;
       }
 
       progress::-webkit-progress-value {
-        background-color:vars.$personal-accent-color;
+        background-color: vars.$personal-accent-color;
         border-radius: 5px;
       }
     }
@@ -156,14 +207,14 @@
       margin-bottom: 0.5rem;
       border-radius: 8px;
       background-color: vars.$subtask-textarea-background;
-      color:vars.$worksubtask-listItem-color;
+      color: vars.$worksubtask-listItem-color;
       transition: background-color 0.2s ease;
 
       input[type="checkbox"] {
         width: vars.$worksubtask-input-checkbox-size;
         height: vars.$worksubtask-input-checkbox-size;
         cursor: pointer;
-        accent-color:vars.$personal-accent-color; // green when checked (modern browsers)
+        accent-color: vars.$personal-accent-color; // green when checked (modern browsers)
       }
 
       li {
@@ -180,7 +231,7 @@
       }
 
       &:hover {
-        background-color:vars.$worksubtask-input-hover-background;
+        background-color: vars.$worksubtask-input-hover-background;
       }
     }
   }

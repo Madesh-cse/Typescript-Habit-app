@@ -1,15 +1,24 @@
 @use "../abstract/variables" as vars;
+@use "../abstract/mixins" as *;
 
 .AllTask-Container {
   display: flex;
 }
 .AllTask {
-  width: 100%;
+  max-width: 100%;
   margin-left: 280px;
+  overflow-x: hidden;
+
+  @include respond-between('xs','sm'){
+    margin-left: 50px;
+  }
 
   .AllTaskFlex {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    @include respond-between('xs','sm'){
+      flex-direction: column;
+    }
   }
   .AllTaskBox {
     width: 500px;
@@ -22,12 +31,14 @@
     color: vars.$color-white;
     overflow-y: auto;
 
+    @include respond-between('xs','sm'){
+      width:330px
+    }
+
     .task-section {
-      .task-subsection {
-        margin-top: 30px;
-        h2 {
-          font-size: 15px;
-        }
+      margin-top: 30px;
+      h2 {
+        font-size: 15px;
       }
       .Select-Task {
         width: 450px;
@@ -37,6 +48,10 @@
         border-radius: 10px;
         margin-bottom: 20px;
         margin-top: 10px;
+        @include respond-between('xs','sm'){
+          width:300px
+        }
+
         .task-subflex {
           display: flex;
           li {
@@ -87,6 +102,10 @@
     border-bottom-left-radius: vars.$personal-border-radius;
     border-bottom-right-radius: vars.$personal-border-radius;
 
+    @include respond-between('xs','sm'){
+      width:330px
+    }
+
     input {
       width: 450px;
       background-color: vars.$personal-taskInput-input-background;
@@ -96,6 +115,10 @@
       border: none;
       border: 1px solid vars.$color-silver;
       outline: none;
+
+      @include respond-between('xs','sm'){
+        width:300px
+      }
 
       &::placeholder {
         color: #888;
@@ -112,4 +135,20 @@
       font-size: 17px;
     }
   }
+
+  .fade-transition {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
 }

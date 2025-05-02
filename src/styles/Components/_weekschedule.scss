@@ -1,4 +1,5 @@
 @use '../abstract/variables' as vars;
+@use "../abstract/mixins" as *;
 
 .Weekschedule-flex{
     display: flex;
@@ -7,6 +8,10 @@
 .weekSchedule{
     width:100%;
     margin-left: 260px;
+
+    @include respond-between('xs','sm'){
+       margin-left: 50px;
+    }
 }
 .TaskCard-grid{
     display: grid;

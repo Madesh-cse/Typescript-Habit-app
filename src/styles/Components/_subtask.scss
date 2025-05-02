@@ -1,5 +1,6 @@
 // SubTask
 @use '../abstract/variables' as vars;
+@use "../abstract/mixins" as *;
 
 .Subtask {
   margin-top: 8px;
@@ -15,6 +16,11 @@
     overflow-y: scroll;
     scrollbar-color: rgba(0, 0, 0, 0.434) transparent;
     margin-left: 40px;
+
+    @include respond-between('xs','sm'){
+     width:330px;
+     margin-left: 3px;
+   }
 
     &.subtask-blur {
       background-color: vars.$subtask-background-blur;
@@ -131,6 +137,10 @@
         border: 1px solid vars.$color-silver;
         outline: none;
 
+        @include respond-between('xs','sm'){
+          width: 300px;
+        }
+
         &:focus {
           border-color: vars.$subtask-tags;
         }
@@ -241,6 +251,12 @@
       cursor: pointer;
       top: 0;
       left: 0;
+    }
+
+    .upload-img{
+      @include respond-between('xs','sm'){
+        width:300px;
+      }
     }
 
     .Upload-label {
