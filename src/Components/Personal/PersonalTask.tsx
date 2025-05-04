@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FaArrowUp } from "react-icons/fa"; 
 import PersonalTaskTools from "./PersonalTaskTools";
 import SubTask from "./SubTask";
+import { db,auth } from "../../Firebase";
+import { setDoc,doc } from "firebase/firestore";
 
 function PersonalTask() {
   const { submittedValue,addSubmisson,toggleCompleted,selectTask,SelectedTask,RemoveTaskList} = useInputContext();
@@ -14,12 +16,32 @@ function PersonalTask() {
   const today = days[todayDate.getDay()];
   const todayTasks = submittedValue[today] || [];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim()) {
+      const user = auth.currentUser;
+      if(!user) return
+
       const todayDateStr = new Date().toISOString();
-      addSubmisson(today, input.trim(),todayDateStr );
-      setInput("");
+      const taskId = `${Date.now()}`;
+
+      const taskDate = {
+        id: taskId,
+        text: input.trim(),
+        completed: false,
+        createdAt: todayDateStr,
+        taskType: "personal",
+      }
+
+      try{
+        await setDoc(doc(db,"users",user.uid,"tasks",taskId),taskDate)
+        console.log("Task saved to Firestore");
+
+        addSubmisson(today, input.trim(),todayDateStr );
+        setInput("");
+      }catch(error:any){
+        console.error("Error saving task to Firestore:", error);
+      }
     }
   };
 

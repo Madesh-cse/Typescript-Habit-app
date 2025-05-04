@@ -3,6 +3,8 @@ import { FaArrowUp } from "react-icons/fa";
 import { useWorkContext } from "../../Context/WorkInputSubmissionContext";
 import SubWorkTask from "./SubWorkTask";
 import { useState } from "react";
+import { db,auth } from "../../Firebase";
+import { setDoc,doc } from "firebase/firestore";
 
 function WorkTask() {
   const { WorkTasks,addWorkSubmission,toggleWorkCompleted,WorkSelectTask,WorkSelectedTask,WorkRemoveTaskList } = useWorkContext();
@@ -14,11 +16,36 @@ function WorkTask() {
   });
   const todayWorkTask = WorkTasks[todayWork] || [];
 
-  const HandleSubmit = (e: React.FormEvent) => {
+  const HandleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (input.trim()) {
-      addWorkSubmission(todayWork, input.trim());
+
+      const user = auth.currentUser;
+      if(!user) return
+
+      const todayDateStr = new Date().toISOString();
+      const taskId = `${Date.now()}`;
+
+      const taskDate = {
+        id: taskId,
+        text: input.trim(),
+        completed: false,
+        createdAt: todayDateStr,
+        taskType: "Work",
+      }
+
+      try{
+        await setDoc(doc(db,"users",user.uid,"work",taskId),taskDate)
+        console.log("Task saved to Firestore");
+
+        addWorkSubmission(todayWork, input.trim(),todayDateStr );
+        setinput("");
+      }catch(error:any){
+        console.error("Error saving task to Firestore:", error);
+      }
+
+      addWorkSubmission(todayWork, input.trim(),todayDateStr);
       setinput("");
     }
   };

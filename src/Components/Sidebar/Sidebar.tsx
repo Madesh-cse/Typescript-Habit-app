@@ -25,7 +25,7 @@ function Sidebar() {
     useEffect(() => {
         const screenWidth = window.innerWidth;
         console.log("Screen width on mount:", screenWidth); // 🔍 Debug
-        if (screenWidth < 768) {
+        if (screenWidth <= 767) {
           setisToogle(false); // Close sidebar initially on small screens
         }
       }, []);
@@ -70,7 +70,7 @@ function Sidebar() {
                         <h3>Madesh</h3>
                         <p>Free Plan</p>
                     </div>
-                    <div className="sidebar-toggle" onClick={HandleOpen}>
+                    <div className="n" onClick={HandleOpen}>
                       <p> {isToogle ? <FaTimes  color='white'/> : <FaBars color='white' />}</p>
                     </div>
                 </div>
@@ -114,7 +114,7 @@ function Sidebar() {
                             </div>
                             <p className='toggle-btn' onClick={(()=>ref.current?.openModal())}><FaPlus/></p>
                         </div>
-                        {!isopen ? <Mylist listContent = {SubmittedValue} WorkCount = {WorkCount}/>:''}
+                        {!isopen ? <Mylist listContent = {SubmittedValue} WorkCount = {WorkCount} isSidebarOpen={isToogle} />:''}
                     </div>
                 </div>
                 {isToogle && (

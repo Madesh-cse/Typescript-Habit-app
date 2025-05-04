@@ -1,13 +1,11 @@
 import "../../styles/Components/_resgister.scss";
 import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth,googleProvider,db } from "../../Firebase";
-import { signInWithPopup } from "firebase/auth";
-import { doc } from "firebase/firestore/lite";
-import { setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider, db } from "../../Firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 interface UserInformation {
   firstname: string;
@@ -21,48 +19,53 @@ function Registration() {
     Email: "",
     password: "",
   });
-
   const [errors, setErrors] = useState<Partial<UserInformation>>({});
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const isValid = (): boolean => {
     const newErrors: Partial<UserInformation> = {};
 
     if (!userData.firstname || userData.firstname.trim().length < 3) {
-      newErrors.firstname = "Full name must be at least 3 characters long";
+      newErrors.firstname = "Full name must be at least 3 characters";
     }
 
-    if (
-      !userData.Email ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.Email)
-    ) {
-      newErrors.Email = "Please enter a valid email address";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.Email)) {
+      newErrors.Email = "Enter a valid email";
     }
 
     if (!userData.password || userData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long";
+      newErrors.password = "Password must be at least 6 characters";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleUserData = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(false);
+    if (!isValid()) return;
 
-    if (isValid()) {
-      try{
-        const userCredential = await createUserWithEmailAndPassword(auth,userData.Email,userData.password)
-        console.log("User created:", userCredential.user);
-        setUserData({ firstname: "", Email: "", password: "" });
-        setErrors({});
-        setSubmitted(true);
-      }
-      catch(error:any){
-        console.error("Error creating user:", error.message);
-        setErrors({ Email: error.message });
-      }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        userData.Email,
+        userData.password
+      );
+
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        uid: userCredential.user.uid,
+        name: userData.firstname,
+        email: userData.Email,
+        provider: "email",
+      });
+
+      setSubmitted(true);
+      alert('You are registered')
+      navigate("/Login");
+    } catch (error: any) {
+      setErrors({ Email:'Permission is not allowed'});
     }
   };
 
@@ -71,19 +74,16 @@ function Registration() {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
-      const userDetail = doc(db, "users", user.uid);
-      await setDoc(userDetail,{
-        uid:user.uid,
-        name:user.displayName,
-        email:user.email,
-        provider:"google",
-        photoURL:user.photoURL
-      })
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name: user.displayName,
+        email: user.email,
+        provider: "google",
+        photoURL: user.photoURL,
+      });
 
-      console.log("Google sign-in and Firestore save successful.");
-      setSubmitted(true);
+      navigate("/");
     } catch (error: any) {
-      console.error("Google Sign-in Error:", error.message);
       setErrors({ Email: error.message });
     }
   };
@@ -101,17 +101,32 @@ function Registration() {
                 <h2>Create an account</h2>
                 <p>Sign up and get a 30-day free trial</p>
                 <div className="form-card">
-                  <form onSubmit={handleUserData}>
+                  <form onSubmit={handleRegister}>
                     <div className="register-name">
                       <label>Full name</label>
-                      <input type="text" value={userData.firstname} onChange={(e) => setUserData({ ...userData, firstname: e.target.value })}
+                      <input
+                        type="text"
+                        value={userData.firstname}
+                        onChange={(e) =>
+                          setUserData({
+                            ...userData,
+                            firstname: e.target.value,
+                          })
+                        }
                         placeholder="Enter the Name"
                       />
                       {errors.firstname && <p>{errors.firstname}</p>}
                     </div>
                     <div className="register-email">
                       <label>Email</label>
-                      <input type="email" value={userData.Email} onChange={(e) => setUserData({ ...userData, Email: e.target.value })}placeholder="Enter the Email"/>
+                      <input
+                        type="email"
+                        value={userData.Email}
+                        onChange={(e) =>
+                          setUserData({ ...userData, Email: e.target.value })
+                        }
+                        placeholder="Enter the Email"
+                      />
                       {errors.Email && <p>{errors.Email}</p>}
                     </div>
                     <div className="register-password">
@@ -129,7 +144,9 @@ function Registration() {
                     <button type="submit">Submit</button>
                   </form>
 
-                  {submitted && <p className="success-msg">Registration successful!</p>}
+                  {submitted && (
+                    <p className="success-msg">Registration successful!</p>
+                  )}
 
                   <div className="third-party">
                     <p>

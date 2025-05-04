@@ -6,13 +6,16 @@
 }
 
 .WorkTaskContainer {
-  max-width: 100%;
+  width: 100%;
   margin-left: 270px;
   overflow-x: hidden;
 
   @include respond-between('xs','sm'){
     margin-left: 50px;
   }
+  @include respond-between('sm','md'){
+    margin-left: 120px;
+}
 
   .WorkFlex {
     display: flex;
@@ -21,6 +24,12 @@
     @include respond-between('xs','sm'){
      flex-direction: column;
     }
+    @include respond-between('sm','md'){
+      flex-direction: column;
+   }
+    @include respond-between('md','lg'){
+      flex-direction: column;
+   }
 
   }
 
@@ -38,6 +47,12 @@
     @include respond-between('xs','sm'){
       width:325px;
       margin-left: 5px;
+    }
+    @include respond-between('sm','md'){
+      margin-left: 40px;
+    }
+    @include respond-between('md','lg'){
+      margin-left: 40px;
     }
 
     &.subtask-blur {
@@ -130,7 +145,7 @@
       }
     }
     .completed {
-      text-decoration: overline;
+      text-decoration:line-through;
       color: vars.$worksubtask-color;
     }
   }
@@ -146,6 +161,12 @@
     @include respond-between('xs','sm'){
       width:330px;
     }
+    @include respond-between('sm','md'){
+      margin-left: 40px;
+  }
+  @include respond-between('md','lg'){
+    margin-left: 40px;
+  }
 
     input {
       width: 450px;

@@ -12,7 +12,7 @@ interface WorkSubmission {
   //work Context
 
   WorkTasks: { [day: string]: WorkTask[] };
-  addWorkSubmission: (day: string, value: string) => void;
+  addWorkSubmission: (day: string, value: string,duedate:string) => void;
   toggleWorkCompleted: (day: string, index: number) => void;
 
   WorkSelectedTask: WorkTask | null;
@@ -59,12 +59,17 @@ export const WorkTaskProvider: React.FC<{ children: React.ReactNode }> = ({
   }>({});
 
   // Work Task
-  const addWorkSubmission = (day: string, text: string) => {
+  const addWorkSubmission = (day: string, text: string,duedate?:string) => {
+    const due = duedate ? new Date(duedate) : (()=>{
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      return today
+    })();
     const newTaskWork: WorkTask = {
       id: uuidv4(),
       text,
       completed: false,
-      duedate: new Date().toISOString(),
+      duedate: due.toISOString(),
       taskType: "Work",
       worksubtasks:[]
     };

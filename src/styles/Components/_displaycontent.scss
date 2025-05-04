@@ -24,6 +24,9 @@
         @include respond-between('xs','sm'){
             width:330px;
         }
+        @include respond-between('sm','md'){
+            width:500px;
+        }
 
         .radio-input{
             input[type="checkbox"] {

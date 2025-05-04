@@ -13,7 +13,7 @@ function DisplayContent() {
             <div className="Content-box" key={`${day}-${index}`}>
               <div className="radio-input">
                 <input  
-                  type="radio"
+                  type="checkbox"
                   checked={task.completed}
                   onChange={() => toggleCompleted(day, index)}
                 />

@@ -5,13 +5,17 @@
   display: flex;
 }
 .AllTask {
-  max-width: 100%;
+  width: 100%;
   margin-left: 280px;
   overflow-x: hidden;
+  overflow-y: hidden;
 
   @include respond-between('xs','sm'){
     margin-left: 50px;
   }
+  @include respond-between('sm','md'){
+    margin-left: 110px;
+ }
 
   .AllTaskFlex {
     display: flex;
@@ -19,6 +23,12 @@
     @include respond-between('xs','sm'){
       flex-direction: column;
     }
+    @include respond-between('sm','md'){
+      flex-direction: column;
+   }
+    @include respond-between('md','lg'){
+      flex-direction: column;
+   }
   }
   .AllTaskBox {
     width: 500px;
@@ -34,6 +44,12 @@
     @include respond-between('xs','sm'){
       width:330px
     }
+    @include respond-between('sm','md'){
+      margin-left: 40px;
+    }
+    @include respond-between('md','lg'){
+      margin-left: 40px;
+   }
 
     .task-section {
       margin-top: 30px;
@@ -105,6 +121,12 @@
     @include respond-between('xs','sm'){
       width:330px
     }
+    @include respond-between('sm','md'){
+      margin-left: 40px;
+    }
+    @include respond-between('md','lg'){
+      margin-left: 40px;
+   }
 
     input {
       width: 450px;

@@ -12,6 +12,10 @@
     @include respond-between('xs','sm'){
        margin-left: 50px;
     }
+    @include respond-between('sm','md'){
+       margin-left: 100px;
+    }
+    
 }
 .TaskCard-grid{
     display: grid;
@@ -19,6 +23,11 @@
     gap: 16px;
     align-items: start;
     padding: 16px;
+
+    @include respond-between('sm','md'){
+       row-gap: 20px;
+       column-gap: 25px;
+     }
 
     .TaskCard{
         width:300px;

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 import Home from './pages/Home/Home';
 import Personal from './pages/Personal/Personal';
@@ -10,6 +10,7 @@ import WeekSchedules from './pages/WeekSchedules/WeekSchedules';
 import AllMyTask from './pages/AllMyTask/AllMyTask';
 import Registration from './Components/Authentication/Registration';
 import Login from './Components/Authentication/Login';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
@@ -17,18 +18,19 @@ function App() {
       <SubmissionProvider>
         <WorkTaskProvider> 
           <Routes>
-            <Route path='/' element={<Home/>}></Route>
-            <Route path='Register'element={<Registration/>}></Route>
-            <Route path='Login' element={<Login/>}></Route>
-            <Route path='Personal' element={<Personal/>}></Route>
-            <Route path='Work' element={<Work/>}></Route>
-            <Route path='weekschedule' element={<WeekSchedules/>}></Route>
-            <Route path='AllTask' element={<AllMyTask/>}></Route>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/personal" element={<Personal />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/weekschedule" element={<WeekSchedules />} />
+            <Route path="/alltask" element={<AllMyTask />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </WorkTaskProvider>
       </SubmissionProvider>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

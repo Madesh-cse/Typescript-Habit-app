@@ -62,7 +62,6 @@ export const SubmissionProvider:React.FC<{children:React.ReactNode}>= ({children
     //Personal Task
     // The submitted value is append to an array 
     const addSubmisson = (day: string,text:string,duedate?: string)=>{
-
       const due = duedate ? new Date(duedate) : (()=>{
         const today = new Date();
         today.setHours(0,0,0,0);

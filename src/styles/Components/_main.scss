@@ -6,9 +6,19 @@
     height:100vh;
     position: relative;
     padding-top: 20px;
+    // border:1px solid red;
+    overflow-x: hidden;
 
     @include respond-between('xs','sm'){
         margin-left: 25px;
+    }
+    @include respond-between('sm','md'){
+        max-width: 100%;
+        margin-left: 100px;
+        // border:1px solid red;
+    }
+    @include respond-between('md','lg'){
+        overflow-x: hidden;
     }
 
     h1{
@@ -31,6 +41,10 @@
             font-size: 20px;
  
         }
+        @include respond-between('sm','md'){
+            font-size: 18px;
+
+        }
     }
 
     .Dynamic-day{
@@ -47,6 +61,11 @@
         @include respond-between('xs','sm'){
             width:330px;
         }
+        @include respond-between('sm','md'){
+            width: 500px;
+
+        }
+        
 
         p{
             font-size: 18px;
@@ -93,13 +112,22 @@
                 width:330px;
      
             }
+            @include respond-between('sm','md'){
+               width:450px;
+               margin-left: 0;
+    
+            }
         }
 
         button{
             position: vars.$postion-absolute;
-            bottom: 10px;
+            bottom:10px;
             right:10px;
-            font-size: vars.$main-font-size;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color:vars.$color-silver;
+            font-size: 17px;
         }
     }
 }

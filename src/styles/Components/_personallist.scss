@@ -11,12 +11,15 @@
     display: flex;
 }
 .TaskContainer{
-    max-width:100%;
+    width:100%;
     margin-left: 280px;
     overflow-x: hidden;
     @include respond-between('xs','sm'){
        margin-left: 50px;
     }
+    @include respond-between('sm','md'){
+        margin-left: 110px;
+      }
 
     .TaskFlex{
         display: flex;
@@ -25,6 +28,13 @@
        @include respond-between('xs','sm'){
         flex-direction: column;
      }
+     @include respond-between('sm','md'){
+        flex-direction: column;
+      }
+      @include respond-between('md','lg'){
+       flex-direction: column;
+     }
+
     }
 
     .TaskBox{
@@ -41,6 +51,13 @@
         @include respond-between('xs','sm'){
             width:330px;
         }
+        @include respond-between('sm','md'){
+            margin-left: 40px;
+        }
+        @include respond-between('md','lg'){
+            margin-left: 40px;
+         }
+        
 
         .TaskBox-flex{
             width:450px;
@@ -137,6 +154,12 @@
         @include respond-between('xs','sm'){
             width:330px;
         }
+        @include respond-between('sm','md'){
+            margin-left: 40px;
+        }
+        @include respond-between('md','lg'){
+            margin-left: 40px;
+         }
 
         input{
             width:450px;

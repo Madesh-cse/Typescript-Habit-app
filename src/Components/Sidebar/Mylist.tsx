@@ -1,13 +1,16 @@
 import { NavLink } from "react-router-dom";
 import '../../styles/Components/_sidebar.scss'
 import { useInputContext } from "../../Context/InputSubmissonContext";
+import { TbCircleDashedCheck } from "react-icons/tb";
+import { IoCalendarNumberSharp } from "react-icons/io5";
 interface MylistProps {
 
-    listContent:string[] | null
-    WorkCount : number
+    listContent:string[] | null;
+    WorkCount : number;
+    isSidebarOpen: boolean;
 }
 
-function Mylist({listContent,WorkCount}:MylistProps) {
+function Mylist({listContent,WorkCount,isSidebarOpen}:MylistProps) {
 
     const {submittedValue} = useInputContext()
 
@@ -15,27 +18,30 @@ function Mylist({listContent,WorkCount}:MylistProps) {
         (total,tasks) => total + tasks.length,0
     )
   return (
-    <div className='sidebar-list'>
+    <div className={`sidebar-list ${isSidebarOpen ? 'expanded' : 'collapsed'}`}>
     <ul>
        <li>
            <NavLink to='/Personal'>
-               <span>Personal</span>
+            <span className="icon"><TbCircleDashedCheck/></span>
+               <span className="text">Personal</span>
                <span className="count">{totalTask}</span>
            </NavLink>
        </li>
        <li>
            <NavLink to='/Work'>
-               <span>Work</span>
+               <span className="icon"><IoCalendarNumberSharp/></span>
+               <span className="text">Work</span>
                <span className="count">{WorkCount}</span>
            </NavLink>
        </li>
        <li>
-           <NavLink to='/WorkList'>
-               <span>Grocery List</span>
+           <NavLink to='/'>
+               <span className="icon"><IoCalendarNumberSharp/></span>
+               <span className="text">Grocery List</span>
            </NavLink>
        </li>
        <li>
-           <NavLink to='/Project'>
+           <NavLink to='/'>
                <span>Project</span>
            </NavLink>
        </li>
