@@ -38,7 +38,7 @@ function Main() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user) {
-        navigate("/login");
+        navigate("/");
       } else {
         const displayName = user.displayName ?? user.email?.split("@")[0] ?? "User";
         setFirstName(displayName);
