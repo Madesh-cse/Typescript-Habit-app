@@ -3,7 +3,7 @@ import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { NavLink, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithRedirect,getRedirectResult } from "firebase/auth";
 import { auth, googleProvider, db } from "../../Firebase";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -71,17 +71,24 @@ function Registration() {
 
   const signInWithGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
+      await signInWithRedirect(auth, googleProvider);
 
-      await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
-        name: user.displayName,
-        email: user.email,
-        provider: "google",
-        photoURL: user.photoURL,
-      });
+      const result = await getRedirectResult(auth);
 
+      if (result?.user) {
+        const user = result.user;
+  
+        // Save user data to Firestore
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          provider: "google",
+          photoURL: user.photoURL,
+        });
+  
+        navigate("/");
+      }
       navigate("/");
     } catch (error: any) {
       setErrors({ Email: error.message });
