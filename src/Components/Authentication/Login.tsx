@@ -2,11 +2,10 @@ import "../../styles/Components/_resgister.scss";
 import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { 
-  signInWithEmailAndPassword, 
-  signInWithRedirect,
-  getRedirectResult,
+import { useState } from "react";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth, googleProvider } from "../../Firebase";
 
@@ -23,22 +22,6 @@ function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Handle redirect result after Google sign-in
-  useEffect(() => {
-    const handleRedirectResult = async () => {
-      try {
-        const result = await getRedirectResult(auth);
-        if (result?.user) {
-          navigate("/"); // Navigate after successful Google sign-in
-        }
-      } catch (error) {
-        setError("Google login failed. Please try again.");
-      }
-    };
-
-    handleRedirectResult();
-  }, [navigate]);
-
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -52,9 +35,12 @@ function Login() {
   };
 
   const handleGoogleLogin = async () => {
+    setError("");
     try {
-      await signInWithRedirect(auth, googleProvider);
-      // Don't navigate here - wait for the redirect result in useEffect
+      const result = await signInWithPopup(auth, googleProvider);
+      if (result?.user) {
+        navigate("/");
+      }
     } catch (err: any) {
       setError(err.message || "Google login failed");
     }
@@ -76,20 +62,30 @@ function Login() {
                   <form onSubmit={handleLogin}>
                     <div className="register-email">
                       <label>Email</label>
-                      <input 
-                        type="email" 
-                        value={userCredential.Email} 
-                        onChange={(e) => setUserCredential({...userCredential, Email: e.target.value})} 
-                        placeholder="Enter the Email" 
+                      <input
+                        type="email"
+                        value={userCredential.Email}
+                        onChange={(e) =>
+                          setUserCredential({
+                            ...userCredential,
+                            Email: e.target.value,
+                          })
+                        }
+                        placeholder="Enter the Email"
                       />
                     </div>
                     <div className="register-password">
                       <label>Password</label>
-                      <input 
-                        type="password" 
-                        value={userCredential.password} 
-                        onChange={(e) => setUserCredential({...userCredential, password: e.target.value})} 
-                        placeholder="Enter the Password" 
+                      <input
+                        type="password"
+                        value={userCredential.password}
+                        onChange={(e) =>
+                          setUserCredential({
+                            ...userCredential,
+                            password: e.target.value,
+                          })
+                        }
+                        placeholder="Enter the Password"
                       />
                     </div>
                     {error && <p className="error-message">{error}</p>}
@@ -102,7 +98,7 @@ function Login() {
                       </span>
                       Apple
                     </p>
-                    <p onClick={handleGoogleLogin}>
+                    <p onClick={handleGoogleLogin} style={{ cursor: "pointer" }}>
                       <span>
                         <FcGoogle />
                       </span>
