@@ -1,5 +1,3 @@
-
-
 // abstract 
 @use "abstract/mixins";
 @use "./abstract/variables" as vars;
@@ -36,7 +34,7 @@ body {
   @media (max-width: 768px) {
     background-size: 100% 100%; 
   }
-  @include respond-between('xs','sm'){
+  @media (max-width: 490px){
     background-size: 100% 100%; 
   }
 }
