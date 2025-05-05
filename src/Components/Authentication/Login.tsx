@@ -39,7 +39,7 @@ function Login() {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       if (result?.user) {
-        navigate("/Login");
+        navigate("/");
       }
     } catch (err: any) {
       setError(err.message || "Google login failed");

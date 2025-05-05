@@ -105,6 +105,12 @@ function Sidebar() {
                                     <span>My calender</span>
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink to='/Login'>
+                                    <span className='icon'><IoCalendarNumberSharp/></span>
+                                    <span>Sign In</span>
+                                </NavLink>
+                            </li>
                         </ul>
                     </div>
                     <div className='toggle-sidebar'>
