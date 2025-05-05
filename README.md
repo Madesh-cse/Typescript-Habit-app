@@ -1,54 +1,58 @@
-# React + TypeScript + Vite
+# 🧠 Typescript Habit App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional Habit & Task Management application built with **React + TypeScript**, integrated with **Firebase Authentication** and deployed on **GitHub Pages**.
 
-Currently, two official plugins are available:
+## 🔗 Live Demo
+[🌐 View App](https://Madesh-cse.github.io/Typescript-Habit-app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ✅ **User Authentication** (Email/Password & Google Sign-In)
+- 📆 **Habit Tracking** for Personal and Work tasks
+- 📋 **Weekly Schedule** & Task Overview
+- 🌙 Dark-themed UI inspired by modern productivity apps
+- 🔒 **Protected Routes** for authenticated users
+- 🔁 Google Login using Firebase Redirect/Popup
+- 📦 Deployed with **GitHub Pages**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React 19** with **TypeScript**
+- **Vite** for fast development and optimized builds
+- **Firebase Authentication**
+- **React Router v7**
+- **React Icons** for UI
+- **SCSS Modules** for styling
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 📂 Folder Structure (Simplified)
+
+├── src
+│ ├── Components
+│ │ └── Authentication
+│ ├── Context
+│ ├── pages
+│ │ ├── Home
+│ │ ├── Personal
+│ │ ├── Work
+│ │ └── ...
+│ ├── styles
+│ └── App.tsx
+├── public
+├── index.html
+└── package.json
+
+---
+
+## 🧪 Setup Locally
+
+```bash
+git clone https://github.com/Madesh-cse/Typescript-Habit-app.git
+cd Typescript-Habit-app
+npm install
+npm run dev
