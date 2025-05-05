@@ -36,4 +36,7 @@ body {
   @media (max-width: 768px) {
     background-size: 100% 100%; 
   }
+  @include respond-between('xs','sm'){
+    background-size: 100% 100%; 
+  }
 }
